@@ -1,0 +1,683 @@
+/* shell.css — Üst Çubuk, LogoMark, Mod Anahtarı ve Ajan Çalışma Alanı */
+
+/* =========================================================
+   LogoMark — dört noktalı canlı amblem (kocamind-web eşleniği)
+   ========================================================= */
+.km-mark {
+  display: block;
+  flex: 0 0 auto;
+  overflow: visible;
+}
+
+.km-mark circle {
+  fill: var(--km-text);
+}
+
+.km-mark .km-mark-accent {
+  fill: var(--km-accent);
+}
+
+.km-mark-dots {
+  transform-origin: 12px 12px;
+  transform-box: view-box;
+}
+
+.km-mark-think .km-mark-dots {
+  animation: kmSpin 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.km-mark-think circle {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: kmBreath 1.5s linear infinite;
+}
+
+.km-mark-think circle:nth-child(2) {
+  animation-delay: -0.375s;
+}
+
+.km-mark-think circle:nth-child(3) {
+  animation-delay: -0.75s;
+}
+
+.km-mark-think circle:nth-child(4) {
+  animation-delay: -1.125s;
+}
+
+@keyframes kmSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes kmBreath {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.42);
+  }
+}
+
+/* =========================================================
+   Üst Çubuk (TitleBar)
+   ========================================================= */
+.km-titlebar {
+  height: var(--km-titlebar-h);
+  min-height: var(--km-titlebar-h);
+  width: 100%;
+  background-color: var(--km-bg-0);
+  border-bottom: 1px solid var(--km-line);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding-left: 12px;
+  user-select: none;
+  flex-shrink: 0;
+  -webkit-app-region: drag;
+  z-index: 50;
+}
+
+.km-titlebar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.km-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--km-text);
+}
+
+.km-brand-name {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--km-text);
+}
+
+/* İki Parçalı Mod Anahtarı (Hap Segmented Control) */
+.km-mode-switch {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  height: 28px;
+  padding: 2px;
+  background-color: var(--km-bg-1);
+  border: 1px solid var(--km-line);
+  border-radius: var(--km-r-pill);
+  -webkit-app-region: no-drag;
+}
+
+.km-mode-switch-thumb {
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  left: 2px;
+  width: calc(50% - 2px);
+  background-color: var(--km-bg-3);
+  border-radius: var(--km-r-pill);
+  pointer-events: none;
+  transition: transform var(--km-dur-2) var(--km-ease-out);
+}
+
+.km-mode-switch-tab {
+  position: relative;
+  z-index: 1;
+  background: transparent;
+  border: none;
+  height: 22px;
+  padding: 0 11px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--km-text-3);
+  border-radius: var(--km-r-pill);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: color var(--km-dur-1) var(--km-ease-out);
+}
+
+.km-mode-switch-tab:hover {
+  color: var(--km-text-2);
+}
+
+.km-mode-switch-tab.active {
+  color: var(--km-text);
+}
+
+.km-mode-switch-tab:focus-visible {
+  outline: 2px solid var(--km-accent);
+  outline-offset: 1px;
+}
+
+/* Orta: Açık Klasör Adı */
+.km-titlebar-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: 0 12px;
+}
+
+.km-titlebar-project {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--km-text-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 320px;
+}
+
+/* Sağ: Panel Düğmeleri ve Pencere Kontrolleri */
+.km-titlebar-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  gap: 6px;
+}
+
+.km-titlebar-toggles {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding-right: 4px;
+  -webkit-app-region: no-drag;
+}
+
+.km-titlebar-tool-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--km-r-1);
+  background: transparent;
+  border: none;
+  color: var(--km-text-3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background-color var(--km-dur-1) var(--km-ease-out),
+    color var(--km-dur-1) var(--km-ease-out);
+}
+
+.km-titlebar-tool-btn:hover {
+  background-color: var(--km-bg-2);
+  color: var(--km-text);
+}
+
+.km-titlebar-tool-btn.active {
+  background-color: var(--km-bg-2);
+  color: var(--km-text);
+}
+
+.km-titlebar-tool-btn:focus-visible {
+  outline: 2px solid var(--km-accent);
+  outline-offset: 1px;
+}
+
+.km-window-controls {
+  display: flex;
+  align-items: stretch;
+  height: var(--km-titlebar-h);
+  -webkit-app-region: no-drag;
+}
+
+.km-win-btn {
+  width: 46px;
+  height: var(--km-titlebar-h);
+  background: transparent;
+  border: none;
+  color: var(--km-text-3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background-color var(--km-dur-1) var(--km-ease-out),
+    color var(--km-dur-1) var(--km-ease-out);
+}
+
+.km-win-btn:hover {
+  background-color: var(--km-bg-2);
+  color: var(--km-text);
+}
+
+.km-win-btn:focus-visible {
+  outline: 2px solid var(--km-accent);
+  outline-offset: -2px;
+}
+
+.km-win-btn.close:hover {
+  background-color: var(--km-danger);
+  color: var(--km-on-accent);
+}
+
+/* =========================================================
+   Mod Geçiş Katmanları (Editör <-> Ajan)
+   ========================================================= */
+.km-stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--km-bg-0);
+}
+
+.km-mode-layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.km-mode-layer.is-active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  visibility: visible;
+  z-index: 2;
+  transition:
+    opacity var(--km-dur-3) var(--km-ease-out),
+    transform var(--km-dur-3) var(--km-ease-out),
+    visibility 0s linear 0s;
+}
+
+.km-mode-layer.is-inactive {
+  opacity: 0;
+  transform: translateY(6px);
+  pointer-events: none;
+  visibility: hidden;
+  z-index: 1;
+  transition:
+    opacity var(--km-dur-1) var(--km-ease-out),
+    transform var(--km-dur-1) var(--km-ease-out),
+    visibility 0s linear var(--km-dur-1);
+}
+
+/* =========================================================
+   Ajan Çalışma Alanı (Sol Çekmece .clone-drawer + Orta Alan)
+   ========================================================= */
+.km-agent-workspace {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: var(--km-bg-0);
+  overflow: hidden;
+}
+
+.clone-drawer,
+.km-agent-sidebar {
+  width: 288px;
+  flex-shrink: 0;
+  background: var(--km-bg-sidebar);
+  border-right: 1px solid var(--km-line);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 16px 14px 14px;
+  gap: 12px;
+  color: var(--km-text);
+  user-select: none;
+}
+
+.clone-drawer.collapsed,
+.km-agent-sidebar.collapsed {
+  display: none;
+}
+
+.drawer-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 6px 4px;
+}
+
+.drawer-title {
+  font-family: var(--km-font-display);
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  color: var(--km-text);
+  line-height: 1;
+}
+
+.drawer-head-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.drawer-search-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 99px;
+  border: none;
+  background: transparent;
+  color: var(--km-text-2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background-color var(--km-dur-1) var(--km-ease-out),
+    color var(--km-dur-1) var(--km-ease-out);
+}
+
+.drawer-search-btn:hover {
+  background: var(--km-bg-2);
+  color: var(--km-text);
+}
+
+.drawer-search-btn:focus-visible {
+  outline: 2px solid var(--km-accent);
+  outline-offset: 1px;
+}
+
+.drawer-search {
+  padding: 0 2px;
+}
+
+.drawer-search input {
+  width: 100%;
+  padding: 9px 14px;
+  background: var(--km-bg-1);
+  border: 1px solid var(--km-line);
+  border-radius: 12px;
+  color: var(--km-text);
+  font-size: 13.5px;
+  font-family: var(--km-font-sans);
+  outline: none;
+  transition: border-color var(--km-dur-1) var(--km-ease-out);
+}
+
+.drawer-search input:focus {
+  border-color: var(--km-line-strong);
+}
+
+.drawer-search input::placeholder {
+  color: var(--km-text-3);
+}
+
+.drawer-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.drawer-new-chat {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 44px;
+  padding: 0 16px;
+  background: var(--km-btn-primary-bg);
+  color: var(--km-btn-primary-text);
+  border: none;
+  border-radius: 99px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--km-font-sans);
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    opacity 0.15s ease;
+}
+
+.drawer-new-chat:hover:not(:disabled) {
+  opacity: 0.92;
+}
+
+.drawer-new-chat:active:not(:disabled) {
+  transform: scale(0.99);
+}
+
+.drawer-new-chat:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.drawer-new-chat:focus-visible {
+  outline: 2px solid var(--km-accent);
+  outline-offset: 2px;
+}
+
+.drawer-history {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+  padding-right: 2px;
+}
+
+.drawer-section-label {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--km-text-3);
+  padding: 4px 10px 2px;
+  letter-spacing: 0.01em;
+}
+
+.km-sidebar-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.km-sidebar-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  color: var(--km-text-2);
+  font-family: var(--km-font-sans);
+  transition:
+    background-color 0.12s ease,
+    color 0.12s ease;
+}
+
+.history-item:hover:not(:disabled) {
+  background: var(--km-bg-2);
+  color: var(--km-text);
+}
+
+.history-item.active {
+  background: var(--km-bg-1);
+  color: var(--km-text);
+}
+
+.history-item:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.history-item:focus-visible {
+  outline: 2px solid var(--km-accent);
+  outline-offset: -2px;
+}
+
+.history-icon {
+  color: var(--km-text-3);
+  flex-shrink: 0;
+}
+
+.history-title {
+  flex: 1;
+  min-width: 0;
+  font-size: 13.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.km-sidebar-session-time {
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  color: var(--km-text-3);
+  flex-shrink: 0;
+}
+
+.history-empty {
+  padding: 24px 12px;
+  text-align: center;
+  color: var(--km-text-3);
+  font-size: 13px;
+}
+
+.km-sidebar-error {
+  padding: 12px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.km-sidebar-error-text {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--km-danger);
+}
+
+.km-sidebar-retry-btn {
+  height: 30px;
+  padding: 0 10px;
+  border-radius: var(--km-r-pill);
+  background-color: var(--km-bg-2);
+  border: 1px solid var(--km-line);
+  color: var(--km-text-2);
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition:
+    background-color var(--km-dur-1) var(--km-ease-out),
+    color var(--km-dur-1) var(--km-ease-out);
+}
+
+.km-sidebar-retry-btn:hover {
+  background-color: var(--km-bg-3);
+  color: var(--km-text);
+}
+
+.km-sidebar-skeletons {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px;
+}
+
+.km-sidebar-skeleton-item {
+  height: 32px;
+  border-radius: 10px;
+  background-color: var(--km-bg-2);
+  opacity: 0.7;
+}
+
+.km-sidebar-skeleton-item.short {
+  width: 65%;
+}
+
+.km-sidebar-skeleton-item.medium {
+  width: 82%;
+}
+
+.drawer-footer {
+  padding-top: 10px;
+  border-top: 1px solid var(--km-line);
+  flex-shrink: 0;
+}
+
+.km-agent-main {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--km-bg-0);
+}
+
+.header-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 99px;
+  background: transparent;
+  border: none;
+  color: var(--km-text-2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.header-btn:hover {
+  background: var(--km-bg-2);
+  color: var(--km-text);
+}
+
+.header-btn:focus-visible {
+  outline: 2px solid var(--km-accent);
+  outline-offset: 2px;
+}
+
+.km-sidebar-expand-floating {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  z-index: 15;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .km-mark-think .km-mark-dots,
+  .km-mark-think circle {
+    animation: none;
+  }
+
+  .km-mode-switch-thumb {
+    transition: none;
+  }
+
+  .km-mode-layer.is-active,
+  .km-mode-layer.is-inactive {
+    transform: none;
+    transition: opacity var(--km-dur-1) linear;
+  }
+}

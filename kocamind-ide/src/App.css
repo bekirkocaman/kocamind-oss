@@ -1,0 +1,521 @@
+/* App.css — KocaMind IDE Kabuk ve Editör Görünümü */
+
+.ag-ide-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--km-bg-0);
+  color: var(--km-text);
+  font-family: var(--km-font-sans);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Toast Bildirimi (kocamind-web Toast.css eşleniği) */
+.ag-toast {
+  position: fixed;
+  top: calc(var(--km-titlebar-h) + 14px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px);
+  background-color: var(--km-bg-1);
+  border: 1px solid var(--km-line-strong);
+  color: var(--km-text);
+  padding: 9px 18px;
+  border-radius: var(--km-r-pill);
+  box-shadow: var(--km-shadow-pop);
+  font-size: 13px;
+  font-weight: 500;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity var(--km-dur-1) var(--km-ease-out),
+    transform 0s linear var(--km-dur-1);
+}
+
+.ag-toast.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  transition:
+    opacity var(--km-dur-3) var(--km-ease-out),
+    transform var(--km-dur-3) var(--km-ease-out);
+}
+
+/* Editör Modu Düzeni */
+.ag-ide-layout {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+/* SOL GEZGİN: Dosyalar */
+.ag-explorer-pane {
+  width: 256px;
+  background-color: var(--km-bg-sidebar);
+  border-right: 1px solid var(--km-line);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.ag-explorer-header {
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px 0 14px;
+  border-bottom: 1px solid var(--km-line);
+}
+
+.ag-explorer-title {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--km-text-2);
+}
+
+.ag-explorer-pane .ag-explorer-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  opacity: 0.65;
+  transition: opacity var(--km-dur-1) var(--km-ease-out);
+}
+
+.ag-explorer-pane:hover .ag-explorer-actions,
+.ag-explorer-pane:focus-within .ag-explorer-actions {
+  opacity: 1;
+}
+
+.ag-icon-btn {
+  background: transparent;
+  border: none;
+  color: var(--km-text-2);
+  width: 28px;
+  height: 28px;
+  border-radius: var(--km-r-1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background-color var(--km-dur-1) var(--km-ease-out),
+    color var(--km-dur-1) var(--km-ease-out);
+}
+
+.ag-icon-btn.small {
+  width: 26px;
+  height: 26px;
+}
+
+.ag-icon-btn:hover,
+.ag-icon-btn.active {
+  background-color: var(--km-bg-2);
+  color: var(--km-text);
+}
+
+.ag-explorer-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 6px 0;
+}
+
+.ag-explorer-empty {
+  padding: 20px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--km-text-3);
+}
+
+.ag-explorer-empty p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.ag-primary-btn {
+  background-color: var(--km-btn-primary-bg);
+  color: var(--km-btn-primary-text);
+  border: none;
+  height: 36px;
+  padding: 0 18px;
+  border-radius: var(--km-r-pill);
+  font-size: 13.5px;
+  font-weight: 500;
+  font-family: var(--km-font-sans);
+  cursor: pointer;
+  transition:
+    opacity var(--km-dur-1) var(--km-ease-out),
+    transform var(--km-dur-1) var(--km-ease-out);
+}
+
+.ag-primary-btn:hover {
+  opacity: 0.92;
+}
+
+.ag-primary-btn:active {
+  transform: scale(0.99);
+}
+
+.ag-primary-btn:focus-visible,
+.ag-icon-btn:focus-visible,
+.ag-save-btn:focus-visible {
+  outline: 2px solid var(--km-accent);
+  outline-offset: 2px;
+}
+
+.ag-secondary-btn {
+  background-color: var(--km-bg-2);
+  color: var(--km-text);
+  border: 1px solid var(--km-line);
+  height: 32px;
+  padding: 0 14px;
+  border-radius: var(--km-r-pill);
+  font-size: 12.5px;
+  font-weight: 500;
+  font-family: var(--km-font-sans);
+  cursor: pointer;
+  transition:
+    background-color var(--km-dur-1) var(--km-ease-out),
+    color var(--km-dur-1) var(--km-ease-out);
+}
+
+.ag-secondary-btn:hover {
+  background-color: var(--km-bg-3);
+  color: var(--km-text);
+}
+
+.ag-secondary-btn:focus-visible {
+  outline: 2px solid var(--km-accent);
+  outline-offset: 2px;
+}
+
+/* Dosya Ağacı (ince girinti kılavuzu, 90 derece dönen ok, sıcak seçili satır) */
+.ag-tree-root {
+  display: flex;
+  flex-direction: column;
+  padding: 0 6px 12px;
+  gap: 1px;
+}
+
+.ag-tree-node {
+  position: relative;
+}
+
+.ag-tree-children {
+  position: relative;
+}
+
+.ag-tree-children::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--tree-guide-x, 14px);
+  width: 1px;
+  background-color: var(--km-line);
+  pointer-events: none;
+}
+
+.ag-tree-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  min-height: 28px;
+  padding: 0 8px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--km-text-2);
+  user-select: none;
+  transition:
+    background-color var(--km-dur-1) var(--km-ease-out),
+    color var(--km-dur-1) var(--km-ease-out);
+}
+
+.ag-tree-item:hover {
+  background-color: var(--km-bg-2);
+  color: var(--km-text);
+}
+
+.ag-tree-item.active {
+  background-color: var(--km-bg-1);
+  color: var(--km-text);
+  font-weight: 500;
+}
+
+.ag-tree-item.root-item {
+  padding-left: 8px;
+  font-weight: 600;
+  color: var(--km-text);
+  margin-bottom: 2px;
+}
+
+.ag-tree-icon-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ag-tree-icon-wrapper.folder {
+  gap: 4px;
+}
+
+.chevron {
+  color: var(--km-text-3);
+  transition: transform var(--km-dur-1) var(--km-ease-out);
+}
+
+.chevron.open {
+  transform: rotate(90deg);
+}
+
+.folder-icon {
+  color: var(--km-text-2);
+}
+
+.file-icon {
+  color: var(--km-text-3);
+}
+
+.ag-tree-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ag-explorer-footer {
+  padding: 10px 12px;
+  border-top: 1px solid var(--km-line);
+}
+
+/* ORTA ALAN: Sekmeler ve Monaco Editör */
+.ag-editor-pane {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--km-bg-0);
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.ag-editor-topbar {
+  height: 38px;
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px 0 0;
+  background-color: var(--km-bg-1);
+  border-bottom: 1px solid var(--km-line);
+  gap: 8px;
+}
+
+.ag-editor-topbar .ag-tab {
+  position: relative;
+  background-color: var(--km-bg-1);
+  color: var(--km-text-3);
+  border-right: 1px solid var(--km-line);
+  border-top: 2px solid transparent;
+  transition:
+    background-color var(--km-dur-1) var(--km-ease-out),
+    color var(--km-dur-1) var(--km-ease-out);
+}
+
+.ag-editor-topbar .ag-tab:hover {
+  background-color: var(--km-bg-2);
+  color: var(--km-text-2);
+}
+
+.ag-editor-topbar .ag-tab.active {
+  background-color: var(--km-bg-0);
+  color: var(--km-text);
+  border-top-color: var(--km-accent);
+}
+
+.ag-editor-topbar .ag-tab-dirty {
+  width: 18px;
+  height: 18px;
+  margin-right: -24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--km-accent);
+  font-size: 9px;
+  pointer-events: none;
+  transition: opacity var(--km-dur-1) var(--km-ease-out);
+}
+
+.ag-editor-topbar .ag-tab-close {
+  color: var(--km-text-3);
+  opacity: 0;
+  transition:
+    opacity var(--km-dur-1) var(--km-ease-out),
+    background-color var(--km-dur-1) var(--km-ease-out),
+    color var(--km-dur-1) var(--km-ease-out);
+}
+
+.ag-editor-topbar .ag-tab:not(.dirty):hover .ag-tab-close,
+.ag-editor-topbar .ag-tab:not(.dirty).active .ag-tab-close,
+.ag-editor-topbar .ag-tab:not(.dirty):focus-within .ag-tab-close {
+  opacity: 1;
+}
+
+.ag-editor-topbar .ag-tab.dirty:hover .ag-tab-dirty,
+.ag-editor-topbar .ag-tab.dirty:focus-within .ag-tab-dirty {
+  opacity: 0;
+}
+
+.ag-editor-topbar .ag-tab.dirty:hover .ag-tab-close,
+.ag-editor-topbar .ag-tab.dirty:focus-within .ag-tab-close {
+  opacity: 1;
+}
+
+.ag-editor-topbar .ag-tab-close:hover {
+  background-color: var(--km-bg-3);
+  color: var(--km-text);
+}
+
+.ag-editor-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--km-text-2);
+  padding-left: 14px;
+}
+
+.ag-editor-breadcrumb.placeholder {
+  color: var(--km-text-3);
+}
+
+.ag-editor-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ag-save-btn {
+  background-color: var(--km-accent);
+  color: var(--km-on-accent);
+  border: none;
+  height: 26px;
+  padding: 0 12px;
+  border-radius: var(--km-r-pill);
+  font-size: 12px;
+  font-weight: 500;
+  font-family: var(--km-font-sans);
+  cursor: pointer;
+  transition: background-color var(--km-dur-1) var(--km-ease-out);
+}
+
+.ag-save-btn:hover {
+  background-color: var(--km-accent-hover);
+}
+
+/* Editör İçeriği ve Sakin Boş Durum */
+.ag-editor-content {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  background-color: var(--km-bg-0);
+}
+
+.ag-editor-empty {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 380px;
+  width: 100%;
+  padding: 0 16px;
+}
+
+.ag-editor-empty-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.ag-editor-empty-title {
+  margin: 0 0 6px;
+  font-family: var(--km-font-display);
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--km-text);
+}
+
+.ag-editor-empty-desc {
+  margin: 0 0 18px;
+  font-size: 13.5px;
+  color: var(--km-text-3);
+  line-height: 1.5;
+}
+
+.ag-primary-btn.empty-cta {
+  margin-bottom: 22px;
+}
+
+.ag-editor-shortcuts {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 240px;
+}
+
+.ag-shortcut-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12.5px;
+  color: var(--km-text-3);
+}
+
+.ag-shortcut-label {
+  color: var(--km-text-2);
+}
+
+.ag-kbd {
+  font-family: var(--km-font-mono);
+  font-size: 11px;
+  color: var(--km-text-2);
+  background-color: var(--km-bg-1);
+  border: 1px solid var(--km-line-strong);
+  border-radius: 6px;
+  padding: 2px 7px;
+}
+
+/* SAĞ PANEL: Dar Asistan Görünümü */
+.ag-chat-pane {
+  width: 380px;
+  background-color: var(--km-bg-0);
+  border-left: 1px solid var(--km-line);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ag-toast,
+  .ag-toast.visible {
+    transform: translateX(-50%);
+    transition: opacity var(--km-dur-1) linear;
+  }
+
+  .chevron {
+    transition: none;
+  }
+}

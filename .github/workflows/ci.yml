@@ -1,0 +1,76 @@
+name: KocaMind kalite kontrolü
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+      - run: npm ci
+      - run: npm test
+
+  web:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: kocamind-web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: kocamind-web/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+
+  # Giriş yapmış kullanıcıyla uçtan uca: Firebase emülatörü + sahte model + gerçek backend + web.
+  web-e2e-full:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            backend/package-lock.json
+            kocamind-web/package-lock.json
+      # Firestore emülatörü Java ister.
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/firebase/emulators
+          key: firebase-emulators-${{ hashFiles('kocamind-web/package-lock.json') }}
+      - run: npm ci
+        working-directory: backend
+      - run: npm ci
+        working-directory: kocamind-web
+      - run: npx playwright install --with-deps chromium
+        working-directory: kocamind-web
+      - run: npm run test:e2e:full
+        working-directory: kocamind-web
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: e2e-full-izleri
+          path: kocamind-web/test-results/

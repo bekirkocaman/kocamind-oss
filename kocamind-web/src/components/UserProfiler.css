@@ -1,0 +1,268 @@
+/* ═══ Admin: Kullanıcı Profil Dashboard ═══ */
+
+.up-dashboard {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--bg);
+  font-family: var(--font-ui);
+}
+
+.up-topbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.up-topbar h2 {
+  font-size: var(--text-md, 15px);
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+  flex: 1;
+}
+
+.up-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  padding: 7px 12px;
+  font-size: var(--text-sm, 13px);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.12s;
+}
+
+.up-back-btn:hover { background: var(--surface-3); color: var(--text); }
+
+.up-admin-badge {
+  background: var(--danger-soft);
+  color: var(--danger);
+  font-size: var(--text-xs, 12px);
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 99px;
+  letter-spacing: 0;
+}
+
+/* ─── Search ─── */
+.up-search-row {
+  margin: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  color: var(--text-muted);
+}
+
+.up-search-row input {
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: var(--text-base, 14px);
+  width: 100%;
+}
+
+/* ─── User Grid ─── */
+.up-user-grid {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 20px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 12px;
+  align-content: start;
+}
+
+.up-user-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.12s;
+}
+
+.up-user-card:hover { border-color: var(--border-strong); box-shadow: var(--shadow-sm); }
+
+.up-user-card-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.up-user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--surface-2);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.up-user-card-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.up-user-card-id {
+  font-size: var(--text-sm, 13px);
+  font-weight: 500;
+  color: var(--text);
+  font-family: var(--font-mono);
+}
+
+.up-user-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--text-xs, 12px);
+  color: var(--text-muted);
+}
+
+.up-user-badge {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: none;
+  border-radius: 99px;
+  padding: 5px 12px;
+  font-size: var(--text-xs, 12px);
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.12s;
+}
+
+.up-user-badge:hover:not(:disabled) { background: var(--accent); color: #fff; }
+.up-user-badge.analyzed { background: rgba(34,197,94,0.15); color: var(--success); cursor: default; }
+.up-user-badge:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.up-user-card-preview {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ─── Detail View ─── */
+.up-detail {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.up-detail-cards {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.up-detail-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+}
+
+.up-detail-card svg { color: var(--accent); }
+.up-detail-card strong { font-size: var(--text-xl, 22px); font-weight: 600; color: var(--text); }
+.up-detail-card span { font-size: var(--text-xs, 12px); font-weight: 500; text-transform: none; letter-spacing: 0; }
+
+.up-analyze-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: var(--text-base, 14px);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.12s;
+}
+
+.up-analyze-btn:hover:not(:disabled) { background: var(--accent-hover); }
+.up-analyze-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.up-no-profile {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--text-muted);
+}
+
+.up-no-profile svg { opacity: 0.3; margin-bottom: 16px; }
+.up-no-profile h3 { color: var(--text-secondary); margin: 0 0 8px; }
+.up-no-profile p { font-size: 13px; margin: 0 0 20px; }
+
+.up-profile-text {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  font-size: var(--text-base, 14px);
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+.up-profile-text h2 { color: var(--accent); font-size: var(--text-md, 15px); font-weight: 600; margin: 18px 0 8px; }
+.up-profile-text h3 { color: var(--text); font-size: var(--text-base, 14px); font-weight: 600; margin: 14px 0 6px; }
+.up-profile-text em { color: var(--text); font-style: italic; }
+.up-profile-date { color: var(--text-muted); font-size: 12px; margin-top: 20px; border-top: 1px solid var(--border); padding-top: 12px; }
+
+.up-loading, .up-empty-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--text-muted);
+  padding: 48px;
+}
+
+.up-empty-state svg { opacity: 0.3; }
+.up-empty-state h3 { color: var(--text-secondary); }
+.up-empty-state p { font-size: var(--text-sm, 13px); }
+
+.up-spin {
+  animation: upSpin 1s linear infinite;
+}
+
+@keyframes upSpin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .up-spin { animation: none; }
+}

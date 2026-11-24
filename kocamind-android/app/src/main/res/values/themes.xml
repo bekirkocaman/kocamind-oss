@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="iconBackground">#20201E</color>
+    <color name="windowBackground">#F9F9F7</color>
+    <!-- Açılış penceresi telefonun temasını izler; uygulama içi tercih onCreate'te uygulanır. -->
+    <style name="Theme.KocaMind" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/windowBackground</item>
+    </style>
+</resources>

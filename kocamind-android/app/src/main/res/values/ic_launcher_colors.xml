@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_bg">#FFFFFFFF</color>
+    <!-- Açılış ekranındaki dönen noktalar (koyu tema: values-night). -->
+    <color name="splashBrand">#FFC6613F</color>
+    <color name="splashDot">#FF131313</color>
+</resources>

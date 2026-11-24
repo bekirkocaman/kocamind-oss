@@ -1,0 +1,54 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdmin() {
+      return request.auth != null && request.auth.token.admin == true;
+    }
+
+    // Silinmeyi bekleyen hesap (60 günlük süre) verisine istemciden erişemez;
+    // geri alma ve kalıcı silme yalnızca backend üzerinden yapılır.
+    function isActiveOwner(userId) {
+      return request.auth != null
+          && request.auth.uid == userId
+          && request.auth.token.get('deletionPending', false) != true;
+    }
+
+    // Kullanıcı profilini sahibi yönetebilir; ödeme sonucu olan `billing`
+    // alanını ise yalnızca Admin SDK kullanan güvenilir backend değiştirebilir.
+    match /users/{userId} {
+      allow read: if isActiveOwner(userId) || isAdmin();
+      allow create: if isActiveOwner(userId)
+                    && !request.resource.data.keys().hasAny(['billing']);
+      allow update: if isActiveOwner(userId)
+                    && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['billing']);
+      allow delete: if isActiveOwner(userId);
+    }
+
+    // Sohbetler, özel asistanlar ve diğer kullanıcı alt koleksiyonları.
+    // `{collection}` segmenti zorunlu: rules v2'de `{document=**}` sıfır
+    // segmentle de eşleştiği için aksi halde bu kural users/{userId}
+    // belgesini de kapsar ve yukarıdaki `billing` korumasını boşa çıkarır.
+    // `invoices` yalnızca backend tarafından yazılır. `skills` ve `skillInstalls`
+    // de öyle: internetten kurulan skill'ler backend'in boyut ve biçim
+    // doğrulamasından geçmeden yazılamaz.
+    match /users/{userId}/{collection}/{document=**} {
+      allow read: if isActiveOwner(userId) || isAdmin();
+      allow write: if isActiveOwner(userId)
+                   && !(collection in ['invoices', 'skills', 'skillInstalls']);
+    }
+
+    // Geri bildirim yalnızca backend'in POST /feedback ucundan (Admin SDK) yazılır.
+    // İstemciden doğrudan yazım açıkken herkes başka bir kullanıcının uid'iyle
+    // kayıt açıp gece işinin o kullanıcının yanıt tarzını ve eval setini
+    // zehirleyebiliyordu. Hiçbir istemci buraya doğrudan yazmıyor.
+    match /feedback/{doc} {
+      allow read, write: if false;
+    }
+
+    // Diğer her şey kapalı
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,277 @@
+<title>KocaMind Yazı ve İkon Denemesi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,400..700&family=Figtree:wght@400..700&family=Onest:wght@400..700&family=Instrument+Sans:wght@400..700&family=Newsreader:opsz,wght@6..72,400..700&family=Source+Serif+4:opsz,wght@8..60,400..700&family=Literata:opsz,wght@7..72,400..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..500,0..1,0&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,200..400,0..1,0&display=block">
+<style>
+/* Düzen: üstte seçim kartları, altta iki telefon (sohbet + Ekle paneli) yan yana; dar ekranda alt alta. */
+:root {
+  /* Sayfa */
+  --page: #f3f4f7; --ink: #0f1115; --ink-2: #4a4f5a; --ink-3: #62687a; --line: #dfe2e8; --card: #ffffff;
+  --pick: #2d4fd6; --pick-soft: #e8edff;
+  /* Uygulamanın açık paleti (Color.kt) */
+  --km-bg: #ffffff; --km-surface: #f4f5f7; --km-elev: #eaecf0; --km-border: #e2e4e9;
+  --km-text: #0f1115; --km-text-2: #4a4f5a; --km-muted: #62687a; --km-brand: #2d4fd6; --km-on-brand: #ffffff;
+  --km-success: #1d8a57;
+  --ui: "Roboto Flex", system-ui, sans-serif;
+  --km-font: "Instrument Sans", system-ui, sans-serif;
+  --km-reply: "Newsreader", Georgia, serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --page: #0b0c0e; --ink: #eceef1; --ink-2: #b3b8c1; --ink-3: #8a909b; --line: #2a2d33; --card: #15171a;
+    --pick: #8ea4ff; --pick-soft: #1d2440;
+    --km-bg: #0f1012; --km-surface: #1a1c20; --km-elev: #24272c; --km-border: #2c2f35;
+    --km-text: #eceef1; --km-text-2: #b3b8c1; --km-muted: #8a909b; --km-brand: #8ea4ff; --km-on-brand: #0f1012;
+    --km-success: #5cc493;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --page: #0b0c0e; --ink: #eceef1; --ink-2: #b3b8c1; --ink-3: #8a909b; --line: #2a2d33; --card: #15171a;
+  --pick: #8ea4ff; --pick-soft: #1d2440;
+  --km-bg: #0f1012; --km-surface: #1a1c20; --km-elev: #24272c; --km-border: #2c2f35;
+  --km-text: #eceef1; --km-text-2: #b3b8c1; --km-muted: #8a909b; --km-brand: #8ea4ff; --km-on-brand: #0f1012;
+  --km-success: #5cc493;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--page); color: var(--ink); font-family: var(--ui); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-inline: 20px; padding-block: 28px 56px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; }
+header h1 { font-size: 26px; line-height: 1.2; margin: 0 0 6px; letter-spacing: -0.4px; text-wrap: balance; }
+header p { margin: 0; color: var(--ink-2); max-width: 62ch; }
+
+.picker { display: grid; gap: 12px; }
+.picker h2 { margin: 0; font-size: 13px; font-weight: 650; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
+.options { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; }
+.opt { position: relative; text-align: left; border: 1.5px solid var(--line); background: var(--card); color: var(--ink); border-radius: 16px; padding: 14px 14px 12px; cursor: pointer; display: grid; gap: 6px; font: inherit; min-width: 0; }
+.opt:hover { border-color: var(--ink-3); }
+.opt:focus-visible { outline: 3px solid var(--pick); outline-offset: 2px; }
+.opt[aria-pressed="true"] { border-color: var(--pick); background: var(--pick-soft); }
+.opt .name { font-size: 15px; font-weight: 650; }
+.opt .sample { font-size: 22px; line-height: 1.15; letter-spacing: -0.2px; }
+.opt .desc { font-size: 13px; color: var(--ink-2); }
+.opt .icons { display: flex; gap: 12px; color: var(--ink); min-height: 26px; align-items: center; }
+.tag { position: absolute; top: 10px; right: 10px; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; padding: 2px 8px; border-radius: 99px; background: var(--pick); color: var(--card); }
+.tag.now { background: var(--line); color: var(--ink-2); }
+
+.verdict { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; display: grid; gap: 6px; }
+.verdict strong { font-size: 15px; }
+.verdict p { margin: 0; color: var(--ink-2); max-width: 75ch; }
+
+.stage > div { min-width: 0; max-width: 100%; }
+.stage { display: flex; flex-wrap: wrap; gap: 28px; justify-content: center; }
+.phone { width: 360px; max-width: 100%; border-radius: 34px; border: 8px solid #1b1d21; background: var(--km-bg); color: var(--km-text); overflow: hidden; font-family: var(--km-font); display: flex; flex-direction: column; height: 720px; position: relative; }
+.cap { text-align: center; font-size: 13px; color: var(--ink-3); margin-top: 8px; }
+
+/* Uygulama içi */
+.ic { width: 22px; height: 22px; display: inline-grid; place-items: center; flex: none; color: currentColor; }
+.ic svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; }
+.ic .ms { font-size: 24px; line-height: 1; font-variation-settings: "FILL" 0, "wght" var(--ms-w, 400), "GRAD" 0, "opsz" 24; }
+.msr { font-family: "Material Symbols Rounded"; font-weight: normal; font-style: normal; }
+.mso { font-family: "Material Symbols Outlined"; font-weight: normal; font-style: normal; }
+
+.bar { display: flex; align-items: center; gap: 10px; padding: 14px 14px 12px; border-bottom: 1px solid var(--km-border); }
+.round { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: var(--km-surface); }
+.logo { display: flex; align-items: center; gap: 8px; font-weight: 650; font-size: 19px; letter-spacing: -0.3px; }
+.dots { width: 18px; height: 18px; position: relative; }
+.dots i { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: var(--km-text); }
+.dots i:nth-child(1) { left: 6px; top: 0; background: var(--km-brand); } .dots i:nth-child(2) { left: 0; top: 6px; } .dots i:nth-child(3) { left: 12px; top: 6px; } .dots i:nth-child(4) { left: 6px; top: 12px; }
+.chip { margin-left: auto; display: flex; align-items: center; gap: 4px; font-size: 14px; color: var(--km-text-2); }
+.chip .on { width: 7px; height: 7px; border-radius: 50%; background: var(--km-success); margin-right: 3px; }
+.chip .ic { width: 18px; height: 18px; } .chip .ms { font-size: 20px; }
+
+.chat { flex: 1; padding: 18px 16px; display: flex; flex-direction: column; gap: 14px; overflow: hidden; }
+.user { align-self: flex-end; max-width: 84%; background: var(--km-surface); padding: 11px 15px; border-radius: 20px 20px 6px 20px; font-size: 15.5px; line-height: 1.45; }
+.edit { align-self: flex-end; display: flex; gap: 5px; align-items: center; color: var(--km-muted); font-size: 13px; margin-top: -6px; }
+.edit .ic { width: 15px; height: 15px; } .edit .ms { font-size: 17px; }
+.ai { display: grid; grid-template-columns: 22px 1fr; gap: 10px; }
+.thought { display: flex; align-items: center; gap: 4px; color: var(--km-muted); font-size: 14px; margin-bottom: 6px; }
+.thought .ic { width: 16px; height: 16px; } .thought .ms { font-size: 18px; }
+.ai p { margin: 0 0 8px; font-size: 16px; line-height: 1.55; font-family: var(--km-reply); }
+.ai h4 { margin: 4px 0 6px; font-size: 16.5px; font-weight: 600; font-family: var(--km-reply); }
+.ai ul { margin: 0 0 8px; padding-left: 18px; font-size: 16px; line-height: 1.55; font-family: var(--km-reply); }
+.actions { display: flex; gap: 6px; margin-top: 4px; }
+.actions span { width: 34px; height: 34px; border-radius: 50%; background: var(--km-surface); display: grid; place-items: center; color: var(--km-text-2); }
+.actions .ic { width: 17px; height: 17px; } .actions .ms { font-size: 19px; }
+
+.composer { margin: 0 12px 14px; border: 1px solid var(--km-border); border-radius: 26px; padding: 6px; display: flex; align-items: center; gap: 4px; background: var(--km-bg); }
+.composer .round { width: 40px; height: 40px; }
+.composer .ph { flex: 1; color: var(--km-muted); font-size: 15.5px; padding-left: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.send { width: 42px; height: 42px; border-radius: 50%; background: var(--km-brand); color: var(--km-on-brand); display: grid; place-items: center; }
+.plain { width: 40px; height: 40px; display: grid; place-items: center; color: var(--km-text-2); }
+
+/* Ekle paneli */
+.dim { flex: 1; background: var(--km-bg); padding: 22px 18px; display: grid; align-content: start; gap: 10px; opacity: .35; }
+.dim .big { font-size: 30px; font-weight: 700; letter-spacing: -0.6px; line-height: 1.1; }
+.sheet { background: var(--km-bg); border-top-left-radius: 26px; border-top-right-radius: 26px; box-shadow: 0 -1px 0 var(--km-border); padding: 10px 14px 18px; display: grid; gap: 12px; }
+.handle { width: 36px; height: 4px; border-radius: 99px; background: var(--km-border); margin: 0 auto 6px; }
+.sheet-top { display: grid; grid-template-columns: 40px 1fr 40px; align-items: center; }
+.sheet-top b { text-align: center; font-size: 17px; font-weight: 650; }
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.tile { background: var(--km-surface); border-radius: 18px; padding: 14px 4px; display: grid; justify-items: center; gap: 8px; font-size: 14.5px; font-weight: 500; }
+.tile .circle { width: 44px; height: 44px; border-radius: 50%; background: var(--km-bg); display: grid; place-items: center; color: var(--km-text-2); }
+.row { background: var(--km-surface); border-radius: 22px; padding: 12px 14px; display: flex; align-items: center; gap: 12px; }
+.row .circle { width: 38px; height: 38px; border-radius: 50%; background: var(--km-bg); display: grid; place-items: center; color: var(--km-text-2); flex: none; }
+.row .t { flex: 1; min-width: 0; } .row .t b { display: block; font-size: 15px; font-weight: 600; } .row .t small { font-size: 13px; color: var(--km-muted); }
+.switch { width: 50px; height: 30px; border-radius: 99px; background: var(--km-brand); position: relative; flex: none; }
+.switch::after { content: ""; position: absolute; right: 4px; top: 4px; width: 22px; height: 22px; border-radius: 50%; background: var(--km-on-brand); }
+.hint { text-align: center; font-size: 13px; color: var(--km-muted); margin: 2px 8px 0; }
+
+@media (prefers-reduced-motion: no-preference) { .opt { transition: border-color .15s, background-color .15s; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>KocaMind için yazı tipi ve ikon önerileri</h1>
+    <p>Yukarıdan bir yazı tipi ve bir ikon stili seç, telefonlar anında değişsin. İlk açılışta Claude'a en yakın ikili seçili; Claude'daki gibi cevaplar serifli, arayüz düz yazıyla. Hepsi Google Fonts'ta, ücretsiz ve Türkçe karakterleri (ğ, ş, ı, İ) tam destekliyor, uygulamaya gömülebilir.</p>
+  </header>
+
+  <section class="picker" aria-labelledby="h-font">
+    <h2 id="h-font">Yazı tipi</h2>
+    <div class="options" id="fonts"></div>
+  </section>
+
+  <section class="picker" aria-labelledby="h-icon">
+    <h2 id="h-icon">İkon stili</h2>
+    <div class="options" id="icons"></div>
+  </section>
+
+  <div class="verdict" id="verdict"></div>
+
+  <div class="stage">
+    <div>
+      <div class="phone" id="p1">
+        <div class="bar">
+          <span class="round" data-i="Menu"></span>
+          <span class="logo"><span class="dots"><i></i><i></i><i></i><i></i></span>KocaMind</span>
+          <span class="chip"><span class="on"></span>DeepSeek V3 <span data-i="ChevronDown"></span></span>
+        </div>
+        <div class="chat">
+          <div class="user">Hafta sonu İzmir'e gidiyorum, yağmur yağarsa ne yapabilirim?</div>
+          <div class="edit"><span data-i="Pencil"></span>Düzenle</div>
+          <div class="ai">
+            <span class="dots" style="margin-top:3px"><i></i><i></i><i></i><i></i></span>
+            <div>
+              <div class="thought">4 saniye düşündü <span data-i="ChevronRight"></span></div>
+              <p>Yağmurlu bir İzmir günü için kapalı ama keyifli üç öneri:</p>
+              <h4>Gezilecek yerler</h4>
+              <ul>
+                <li>Kemeraltı Çarşısı'nın kapalı hanları</li>
+                <li>Arkeoloji ve Etnografya müzeleri</li>
+                <li>Kordon'da bir kahve, cam kenarı</li>
+              </ul>
+              <div class="actions">
+                <span data-i="Volume2"></span><span data-i="Copy"></span><span data-i="Share2"></span><span data-i="RotateCcw"></span><span data-i="ThumbsUp"></span><span data-i="ThumbsDown"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="composer">
+          <span class="round" data-i="Plus"></span>
+          <span class="plain" data-i="Mic"></span>
+          <span class="ph">KocaMind'e bir şeyler yaz…</span>
+          <span class="send" data-i="ArrowUp"></span>
+        </div>
+      </div>
+      <div class="cap">Sohbet ekranı</div>
+    </div>
+
+    <div>
+      <div class="phone" id="p2">
+        <div class="dim">
+          <small style="letter-spacing:.12em;font-weight:700;color:var(--km-brand)">KOCAMIND</small>
+          <div class="big">İyi günler, Bekir.</div>
+          <div style="color:var(--km-muted)">Bugün ne üzerinde çalışmak istersin?</div>
+        </div>
+        <div class="sheet">
+          <div class="handle"></div>
+          <div class="sheet-top"><span data-i="X"></span><b>Ekle</b><span></span></div>
+          <div class="tiles">
+            <div class="tile"><span class="circle" data-i="Camera"></span>Kamera</div>
+            <div class="tile"><span class="circle" data-i="Image"></span>Fotoğraflar</div>
+            <div class="tile"><span class="circle" data-i="FileText"></span>Dosyalar</div>
+          </div>
+          <div class="row">
+            <span class="circle" data-i="Sparkles"></span>
+            <span class="t"><b>Derin düşünce</b><small>Cevap vermeden önce uzun düşünür</small></span>
+            <span class="switch" aria-hidden="true"></span>
+          </div>
+          <div class="hint">Görsel, video ya da araştırma için yazman yeterli.</div>
+        </div>
+      </div>
+      <div class="cap">+ paneli</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const LUCIDE = {"Volume2": ["M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z", "M16 9a5 5 0 0 1 0 6", "M19.364 18.364a9 9 0 0 0 0-12.728"], "Share2": ["M15.0,5.0a3.0,3.0 0 1,0 6.0,0a3.0,3.0 0 1,0 -6.0,0", "M3.0,12.0a3.0,3.0 0 1,0 6.0,0a3.0,3.0 0 1,0 -6.0,0", "M15.0,19.0a3.0,3.0 0 1,0 6.0,0a3.0,3.0 0 1,0 -6.0,0", "M8.59,13.51L15.42,17.49", "M15.41,6.51L8.59,10.49"], "Menu": ["M4 5h16", "M4 12h16", "M4 19h16"], "ChevronDown": ["m6 9 6 6 6-6"], "Plus": ["M5 12h14", "M12 5v14"], "Mic": ["M12 19v3", "M19 10v2a7 7 0 0 1-14 0v-2", "M12.0,2.0h0.0a3.0,3.0 0 0,1 3.0,3.0v7.0a3.0,3.0 0 0,1 -3.0,3.0h-0.0a3.0,3.0 0 0,1 -3.0,-3.0v-7.0a3.0,3.0 0 0,1 3.0,-3.0z"], "ArrowUp": ["m5 12 7-7 7 7", "M12 19V5"], "Camera": ["M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z", "M9.0,13.0a3.0,3.0 0 1,0 6.0,0a3.0,3.0 0 1,0 -6.0,0"], "Image": ["M5.0,3.0h14.0a2.0,2.0 0 0,1 2.0,2.0v14.0a2.0,2.0 0 0,1 -2.0,2.0h-14.0a2.0,2.0 0 0,1 -2.0,-2.0v-14.0a2.0,2.0 0 0,1 2.0,-2.0z", "M7.0,9.0a2.0,2.0 0 1,0 4.0,0a2.0,2.0 0 1,0 -4.0,0", "m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"], "FileText": ["M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z", "M14 2v5a1 1 0 0 0 1 1h5", "M10 9H8", "M16 13H8", "M16 17H8"], "Sparkles": ["M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z", "M20 2v4", "M22 4h-4", "M2.0,20.0a2.0,2.0 0 1,0 4.0,0a2.0,2.0 0 1,0 -4.0,0"], "Copy": ["M10.0,8.0h10.0a2.0,2.0 0 0,1 2.0,2.0v10.0a2.0,2.0 0 0,1 -2.0,2.0h-10.0a2.0,2.0 0 0,1 -2.0,-2.0v-10.0a2.0,2.0 0 0,1 2.0,-2.0z", "M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"], "ThumbsUp": ["M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z", "M7 10v12"], "ThumbsDown": ["M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22a3.13 3.13 0 0 1-3-3.88Z", "M17 14V2"], "RotateCcw": ["M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8", "M3 3v5h5"], "X": ["M18 6 6 18", "m6 6 12 12"], "Pencil": ["M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z", "m15 5 4 4"], "ChevronRight": ["m9 18 6-6-6-6"]};
+const MATERIAL = {
+  Menu: "menu", ChevronDown: "expand_more", ChevronRight: "chevron_right", Plus: "add", Mic: "mic", ArrowUp: "arrow_upward",
+  Camera: "photo_camera", Image: "image", FileText: "description", Sparkles: "auto_awesome", Copy: "content_copy",
+  ThumbsUp: "thumb_up", ThumbsDown: "thumb_down", Volume2: "volume_up", RotateCcw: "refresh", Share2: "share", X: "close", Pencil: "edit"
+};
+// css: arayüz yazısı, reply: yapay zekâ cevabının yazısı (Claude'da cevaplar serifli).
+const FONTS = [
+  { id: "claude1", name: "Newsreader + Instrument Sans", css: '"Instrument Sans", system-ui, sans-serif', reply: '"Newsreader", Georgia, serif', desc: "Claude'a en yakını. Cevaplar kitap gibi serifli, arayüz sade.", pick: true },
+  { id: "claude2", name: "Source Serif 4 + Figtree", css: '"Figtree", system-ui, sans-serif', reply: '"Source Serif 4", Georgia, serif', desc: "Claude havası, biraz daha yumuşak. Serif daha dolgun, ekranda net." },
+  { id: "claude3", name: "Literata + Onest", css: '"Onest", system-ui, sans-serif', reply: '"Literata", Georgia, serif', desc: "E-kitap okuyucular için çizilmiş serif. Uzun cevaplarda en rahatı." },
+  { id: "roboto", name: "Roboto Flex", css: '"Roboto Flex", system-ui, sans-serif', desc: "Şu anki. Her yer aynı düz yazı tipi.", now: true },
+  { id: "figtree", name: "Figtree", css: '"Figtree", system-ui, sans-serif', desc: "İlk önerim. Her yer yuvarlak, düz yazı tipi." }
+];
+const ICONS = [
+  { id: "lucide125", name: "Lucide · çok ince", desc: "Claude'un ikonları gibi ince ve zarif çizgi.", pick: true },
+  { id: "lucide15", name: "Lucide · ince", desc: "Biraz daha belirgin; küçük ekranda daha kolay seçilir." },
+  { id: "lucide2", name: "Lucide · kalın", desc: "Şu anki. Net ama ağır.", now: true },
+  { id: "msr", name: "Material Rounded", desc: "Android'in kendi yuvarlak ikonları." }
+];
+let state = { font: "claude1", icon: "lucide125" };
+try { const s = JSON.parse(localStorage.getItem("km-demo2") || "null"); if (s && FONTS.some(f => f.id === s.font) && ICONS.some(i => i.id === s.icon)) state = s; } catch (e) {}
+
+function icon(name, style) {
+  if (style === "msr" || style === "mso") {
+    const w = style === "mso" ? 300 : 400;
+    return `<span class="ic"><span class="ms ${style}" style="--ms-w:${w}">${MATERIAL[name]}</span></span>`;
+  }
+  const sw = style === "lucide125" ? 1.25 : style === "lucide15" ? 1.5 : 2;
+  const paths = (LUCIDE[name] || []).map(d => `<path d="${d}"/>`).join("");
+  return `<span class="ic"><svg viewBox="0 0 24 24" stroke-width="${sw}">${paths}</svg></span>`;
+}
+function paintIcons(root, style) {
+  root.querySelectorAll("[data-i]").forEach(el => {
+    const holder = el.matches(".round,.circle,.send,.plain,.actions span") ? el : el;
+    holder.innerHTML = icon(el.dataset.i, style);
+  });
+}
+function card(o, group) {
+  const b = document.createElement("button");
+  b.type = "button"; b.className = "opt"; b.id = `${group}-${o.id}`;
+  b.setAttribute("aria-pressed", state[group] === o.id);
+  const tag = o.pick ? '<span class="tag">Önerim</span>' : o.now ? '<span class="tag now">Şu anki</span>' : "";
+  const preview = group === "font"
+    ? `<span class="sample" style="font-family:${o.reply || o.css}">Ağır ışık, güçlü öğüt</span>`
+    : `<span class="icons">${["Camera","Image","Sparkles","Mic","Copy"].map(n => icon(n, o.id)).join("")}</span>`;
+  b.innerHTML = `${tag}<span class="name" ${group === "font" ? `style="font-family:${o.css}"` : ""}>${o.name}</span>${preview}<span class="desc">${o.desc}</span>`;
+  b.addEventListener("click", () => { state[group] = o.id; render(); });
+  return b;
+}
+function render() {
+  const f = FONTS.find(x => x.id === state.font), i = ICONS.find(x => x.id === state.icon);
+  document.documentElement.style.setProperty("--km-font", f.css);
+  document.documentElement.style.setProperty("--km-reply", f.reply || f.css);
+  const fontsEl = document.getElementById("fonts"), iconsEl = document.getElementById("icons");
+  fontsEl.replaceChildren(...FONTS.map(o => card(o, "font")));
+  iconsEl.replaceChildren(...ICONS.map(o => card(o, "icon")));
+  document.querySelectorAll(".phone").forEach(p => paintIcons(p, state.icon));
+  const isPick = f.pick && i.pick, isNow = f.now && i.now;
+  document.getElementById("verdict").innerHTML = isPick
+    ? `<strong>Claude gibi: Newsreader + Instrument Sans, çok ince Lucide</strong><p>Claude'un kullandığı yazı tipleri ücretli, uygulamaya konamıyor. Bunlar onlara en yakın ücretsiz karşılıklar: cevaplar serifli (Claude'daki gibi kitap hissi), menüler ve butonlar sade düz yazı, ikonlar ince çizgi. Hepsi Türkçe karakterleri tam destekliyor.</p>`
+    : isNow
+    ? `<strong>Şu anki hali: Roboto Flex + Lucide</strong><p>Karşılaştırma için uygulamanın bugünkü görünümü.</p>`
+    : `<strong>Seçimin: ${f.name} + ${i.name}</strong><p>Beğendiğin ikiliyi bana söylemen yeterli; uygulamaya onu uygularım.</p>`;
+  try { localStorage.setItem("km-demo2", JSON.stringify(state)); } catch (e) {}
+}
+document.fonts && document.fonts.ready.then(render);
+render();
+</script>

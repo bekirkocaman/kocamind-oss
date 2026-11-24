@@ -1,0 +1,114 @@
+@keyframes emptyIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.empty-state {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 24px clamp(52px, 9vh, 96px);
+  overflow-y: auto;
+}
+
+.empty-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: min(100%, 680px);
+  text-align: center;
+}
+
+.empty-inner > * { animation: emptyIn 260ms cubic-bezier(.22, 1, .36, 1) both; }
+.empty-inner > :nth-child(2) { animation-delay: 50ms; }
+.empty-inner > :nth-child(3) { animation-delay: 100ms; }
+
+/* claude-theme.css içindeki kmBreathe animasyonunu bastırarak logonun sakin durmasını sağlar */
+.empty-state .empty-inner .km-mark {
+  animation: none;
+  opacity: 0.9;
+}
+
+.empty-title {
+  margin: 0;
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: var(--text-2xl, 28px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.empty-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.empty-suggestion {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-ui);
+  font-size: var(--text-sm, 13.5px);
+  font-weight: 500;
+  line-height: 1.25;
+  cursor: pointer;
+  transition: background-color 140ms ease, color 140ms ease, border-color 140ms ease;
+}
+
+.empty-suggestion svg {
+  flex-shrink: 0;
+  color: var(--text-secondary);
+  transition: color 140ms ease;
+}
+
+.empty-suggestion:hover {
+  background: var(--surface-2);
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+
+.empty-suggestion:hover svg {
+  color: var(--text);
+}
+
+.empty-suggestion:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .empty-state {
+    padding: 20px 16px 48px;
+  }
+
+  .empty-suggestions {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .empty-inner > * { animation: none; }
+  .empty-state .empty-inner .km-mark { animation: none; }
+  .empty-suggestion,
+  .empty-suggestion svg { transition: none; }
+}
+
+[data-reduce-motion='true'] .empty-inner > * { animation: none; }
+[data-reduce-motion='true'] .empty-state .empty-inner .km-mark { animation: none; }
+[data-reduce-motion='true'] .empty-suggestion,
+[data-reduce-motion='true'] .empty-suggestion svg { transition: none; }

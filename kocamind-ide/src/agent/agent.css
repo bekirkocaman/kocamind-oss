@@ -1,0 +1,1857 @@
+/* agent.css — KocaMind IDE Asistan ve Ajan Modu (kocamind-web eşleniği) */
+
+.chat-view,
+.ag-agent-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: var(--km-bg-0);
+  color: var(--km-text);
+  font-family: var(--km-font-sans);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.ag-agent-panel.variant-panel {
+  background-color: var(--km-bg-0);
+}
+
+/* Masaüstü dışı (tarayıcı önizlemesi) durumu */
+.ag-agent-unavailable {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 24px;
+  text-align: center;
+  gap: 12px;
+}
+
+.ag-agent-unavailable-title {
+  font-family: var(--km-font-display);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--km-text);
+}
+
+.ag-agent-unavailable-desc {
+  font-size: 13.5px;
+  color: var(--km-text-3);
+  max-width: 280px;
+  margin: 0;
+}
+
+/* Dar Panel Başlığı (Editör modu sağ panel) */
+.ag-agent-header {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--km-line);
+  background-color: var(--km-bg-0);
+  flex-shrink: 0;
+}
+
+.ag-agent-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 30px;
+}
+
+.ag-agent-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.ag-agent-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--km-text);
+}
+
+.ag-agent-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Ajan Modu Üst Çubuk (Konuşma alanı içi) */
+.ag-workspace-topbar {
+  padding: 10px 24px 6px 56px;
+  flex-shrink: 0;
+}
+
+.ag-workspace-topbar-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 32px;
+  gap: 8px;
+}
+
+.ag-workspace-topbar-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ag-workspace-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Ortak düğmeler */
+.ag-agent-btn-reset {
+  background-color: transparent;
+  border: none;
+  color: var(--km-text-2);
+  font-size: 12.5px;
+  font-family: var(--km-font-sans);
+  height: 32px;
+  padding: 0 11px;
+  border-radius: var(--km-r-pill);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition:
+    background-color var(--km-dur-1) var(--km-ease-out),
+    color var(--km-dur-1) var(--km-ease-out);
+}
+
+.ag-agent-btn-reset:hover:not(:disabled),
+.ag-agent-btn-reset.active:not(:disabled) {
+  background-color: var(--km-bg-2);
+  color: var(--km-text);
+}
+
+.ag-agent-btn-reset:focus-visible {
+  background-color: var(--km-bg-2);
+  color: var(--km-text);
+  outline: 2px solid var(--km-accent);
+  outline-offset: 2px;
+}
+
+.ag-agent-btn-reset.primary-subtle {
+  background-color: var(--km-btn-primary-bg);
+  color: var(--km-btn-primary-text);
+  font-weight: 500;
+}
+
+.ag-agent-btn-reset.primary-subtle:hover:not(:disabled) {
+  opacity: 0.92;
+  background-color: var(--km-btn-primary-bg);
+  color: var(--km-btn-primary-text);
+}
+
+.ag-agent-btn-reset:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.ag-agent-icon-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--km-r-pill);
+  background: transparent;
+  border: none;
+  color: var(--km-text-2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background-color var(--km-dur-1) var(--km-ease-out),
+    color var(--km-dur-1) var(--km-ease-out);
+}
+
+.ag-agent-icon-btn:hover:not(:disabled),
+.ag-agent-icon-btn.active:not(:disabled) {
+  background-color: var(--km-bg-2);
+  color: var(--km-text);
+}
+
+.ag-agent-icon-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.ag-agent-icon-btn:focus-visible {
+  outline: 2px solid var(--km-accent);
+  outline-offset: 2px;
+}
+
+/* Daha fazla menüsü */
+.ag-agent-more-wrap {
+  position: relative;
+}
+
+.ag-agent-more-popover {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 184px;
+  background-color: var(--km-bg-1);
+  border: 1px solid var(--km-line-strong);
+  border-radius: 16px;
+  padding: 6px;
+  box-shadow: var(--km-shadow-pop);
+  z-index: 35;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ag-agent-more-item {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--km-text-2);
+  font-size: 13px;
+  font-family: var(--km-font-sans);
+  height: 34px;
+  padding: 0 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  text-align: left;
+  transition:
+    background-color var(--km-dur-1) var(--km-ease-out),
+    color var(--km-dur-1) var(--km-ease-out);
+}
+
+.ag-agent-more-item:hover:not(:disabled) {
+  background-color: var(--km-bg-2);
+  color: var(--km-text);
+}
+
+.ag-agent-more-item:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Plan Bölümü (Sayılı ilerleme satırı) */
+.ag-agent-plan {
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--km-line);
+  background-color: var(--km-bg-1);
+  font-size: 12.5px;
+  flex-shrink: 0;
+}
+
+.ag-agent-plan.workspace-plan {
+  background-color: var(--km-bg-0);
+  padding: 8px 24px;
+}
+
+.ag-agent-plan-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ag-agent-plan-bar {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 2px 0;
+  color: var(--km-text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--km-font-sans);
+}
+
+.ag-plan-chevron {
+  display: inline-flex;
+  align-items: center;
+  color: var(--km-text-3);
+  transition: transform var(--km-dur-1) var(--km-ease-out);
+}
+
+.ag-plan-chevron.open {
+  transform: rotate(90deg);
+}
+
+.ag-agent-plan-badge {
+  font-size: 11px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  padding: 2px 7px;
+  border-radius: var(--km-r-pill);
+  background-color: var(--km-accent-soft);
+  color: var(--km-accent);
+  flex-shrink: 0;
+}
+
+.ag-agent-plan-summary {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--km-text-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ag-agent-plan-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 2px 0 2px 18px;
+}
+
+.ag-agent-plan-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--km-text-2);
+}
+
+.ag-agent-plan-num {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: var(--km-bg-2);
+  color: var(--km-text-3);
+  font-size: 11px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ag-agent-plan-item.completed {
+  color: var(--km-text-3);
+}
+
+.ag-agent-plan-item.completed .ag-agent-plan-num {
+  background-color: var(--km-bg-2);
+  color: var(--km-success);
+}
+
+.ag-agent-plan-item.in_progress {
+  color: var(--km-text);
+  font-weight: 500;
+}
+
+.ag-agent-plan-item.in_progress .ag-agent-plan-num {
+  background-color: var(--km-accent-soft);
+  color: var(--km-accent);
+}
+
+.ag-agent-plan-item.pending {
+  color: var(--km-text-3);
+}
+
+/* =========================================================
+   Mesajlar / Konuşma Alanı (.messages-container)
+   ========================================================= */
+.messages-container,
+.ag-agent-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 18px 16px 12px;
+}
+
+.ag-agent-panel.variant-workspace .ag-agent-messages {
+  padding: 16px 24px 12px;
+}
+
+.ag-agent-messages-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-height: 100%;
+}
+
+.ag-agent-panel.variant-workspace .ag-agent-messages-inner {
+  max-width: 760px;
+  width: 100%;
+  margin: 0 auto;
+  gap: 26px;
+}
+
+/* =========================================================
+   Boş Durum (EmptyState — kocamind-web eşleniği)
+   ========================================================= */
+.ag-workspace-empty-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  gap: 28px;
+  overflow-y: auto;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px 16px;
+  gap: 20px;
+}
+
+.ag-agent-empty {
+  margin: auto 0;
+}
+
+.empty-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 520px;
+}
+
+.empty-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.empty-title {
+  margin: 0;
+  font-family: var(--km-font-display);
+  font-size: clamp(30px, 5vw, 40px);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  color: var(--km-text);
+}
+
+.empty-title.empty-title-compact {
+  font-size: 28px;
+}
+
+.empty-subtitle {
+  margin: 8px 0 0;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--km-text-3);
+}
+
+.ag-agent-panel.variant-panel .empty-subtitle {
+  font-size: 13.5px;
+}
+
+.empty-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  max-width: 560px;
+}
+
+.empty-suggestion {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  background: var(--km-bg-1);
+  border: 1px solid var(--km-line);
+  border-radius: 99px;
+  color: var(--km-text-2);
+  font-size: 13.5px;
+  font-family: var(--km-font-sans);
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.empty-suggestion:hover {
+  background: var(--km-bg-2);
+  border-color: var(--km-line-strong);
+  color: var(--km-text);
+}
+
+.empty-suggestion:focus-visible {
+  outline: 2px solid var(--km-accent);
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   Mesajlar (.message.user ve .message.assistant)
+   ========================================================= */
+.message {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.message.user,
+.ag-agent-msg-user-wrap {
+  align-items: flex-end;
+}
+
+.message.user .message-content {
+  max-width: 78%;
+}
+
+.ag-agent-panel.variant-panel .message.user .message-content {
+  max-width: 86%;
+}
+
+.message.user .message-text,
+.ag-agent-msg-user {
+  background: var(--km-bg-2);
+  color: var(--km-text);
+  padding: 10px 18px;
+  border-radius: 20px;
+  font-size: 15.5px;
+  line-height: 1.5;
+  font-family: var(--km-font-sans);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.ag-agent-panel.variant-panel .ag-agent-msg-user {
+  font-size: 14px;
+  padding: 8px 14px;
+}
+
+.message.assistant,
+.ag-agent-msg-assistant-wrap {
+  align-items: flex-start;
+}
+
+.message.assistant .message-content {
+  width: 100%;
+}
+
+.message.assistant .message-text,
+.ag-agent-msg-assistant {
+  font-family: var(--km-font-serif);
+  font-size: 16.5px;
+  line-height: 1.65;
+  color: var(--km-text);
+  letter-spacing: -0.003em;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.ag-agent-panel.variant-panel .ag-agent-msg-assistant {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.typing-cursor,
+.ag-agent-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: var(--km-accent);
+  margin-left: 3px;
+  vertical-align: text-bottom;
+  animation: km-cursor-blink 1s step-end infinite;
+}
+
+@keyframes km-cursor-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* =========================================================
+   ThinkingPanel — "Düşündü" / "Düşünüyor" şeridi (kocamind-web)
+   ========================================================= */
+.thinking-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 2px 0 10px;
+}
+
+.thinking-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 2px;
+  flex-shrink: 0;
+}
+
+.thinking-panel {
+  flex: 1;
+  min-width: 0;
+}
+
+.thinking-head {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 2px;
+  background: transparent;
+  border: none;
+  color: var(--km-text-3);
+  font-size: 14px;
+  font-family: var(--km-font-sans);
+  cursor: pointer;
+  border-radius: 6px;
+  transition: color 0.15s ease;
+}
+
+.thinking-head:hover {
+  color: var(--km-text-2);
+}
+
+.thinking-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.thinking-shimmer {
+  display: inline-block;
+  color: var(--km-text-2);
+  font-weight: 500;
+  animation: kmThinkPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes kmThinkPulse {
+  0%,
+  100% {
+    opacity: 0.95;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+.thinking-timer {
+  font-size: 12px;
+  color: var(--km-text-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.thinking-chevron {
+  transition: transform 0.2s ease;
+  color: var(--km-text-3);
+}
+
+.thinking-panel.open .thinking-chevron {
+  transform: rotate(180deg);
+}
+
+.thinking-body {
+  margin-top: 6px;
+  padding: 6px 0 6px 14px;
+  border-left: 2px solid var(--km-line-strong);
+  color: var(--km-text-3);
+  font-family: var(--km-font-sans);
+  font-size: 13.5px;
+  line-height: 1.55;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.thinking-body p {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+/* =========================================================
+   Ajan Adımları (.agent-steps — kocamind-web eşleniği)
+   ========================================================= */
+.agent-steps {
+  margin: 2px 0;
+  border: 1px solid var(--km-line);
+  border-radius: 12px;
+  background: var(--km-bg-1);
+  overflow: hidden;
+  font-family: var(--km-font-sans);
+}
+
+.agent-steps-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 13px;
+  background: transparent;
+  border: none;
+  color: var(--km-text-2);
+  font-size: 12.5px;
+  font-family: var(--km-font-sans);
+  cursor: pointer;
+}
+
+.agent-steps-head:hover {
+  color: var(--km-text);
+}
+
+.agent-steps-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.agent-live-dots {
+  display: inline-flex;
+  gap: 3px;
+  margin-left: 2px;
+}
+
+.agent-live-dots span {
+  width: 4px;
+  height: 4px;
+  border-radius: 99px;
+  background: var(--km-accent);
+  animation: kmBreath 1.2s ease-in-out infinite;
+}
+
+.agent-live-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.agent-live-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.agent-steps-chevron {
+  transition: transform 0.2s ease;
+  color: var(--km-text-3);
+}
+
+.agent-steps.open .agent-steps-chevron {
+  transform: rotate(180deg);
+}
+
+.agent-steps-list {
+  border-top: 1px solid var(--km-line);
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.agent-step {
+  font-size: 12.5px;
+  color: var(--km-text-2);
+}
+
+.agent-step-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.agent-step-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--km-text-3);
+  flex-shrink: 0;
+}
+
+.agent-step.done .agent-step-icon {
+  color: var(--km-success);
+}
+
+.agent-step.error .agent-step-icon {
+  color: var(--km-danger);
+}
+
+.agent-step-spinner {
+  width: 11px;
+  height: 11px;
+  border: 1.6px solid var(--km-line-strong);
+  border-top-color: var(--km-accent);
+  border-radius: 99px;
+  animation: kmSpin 0.8s linear infinite;
+}
+
+.agent-step-title {
+  color: var(--km-text);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.agent-step-args {
+  color: var(--km-text-3);
+  font-family: var(--km-font-mono);
+  font-size: 11.5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
+}
+
+.agent-step-preview {
+  margin: 5px 0 2px 24px;
+  padding: 7px 10px;
+  background: var(--km-bg-0);
+  border: 1px solid var(--km-line);
+  border-radius: 8px;
+  color: var(--km-danger);
+  font-family: var(--km-font-mono);
+  font-size: 11.5px;
+  line-height: 1.45;
+  max-height: 140px;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* =========================================================
+   Onay Kartı (.agent-approval-card — kocamind-web eşleniği)
+   ========================================================= */
+.agent-approval {
+  margin: 4px 0;
+  display: flex;
+}
+
+.agent-approval-card,
+.ag-agent-approval-card {
+  width: 100%;
+  max-width: 680px;
+  background: var(--km-bg-1);
+  border: 1px solid var(--km-line-strong);
+  border-radius: 16px;
+  padding: 14px 16px;
+  font-family: var(--km-font-sans);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ag-agent-approval-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.agent-approval-title,
+.ag-agent-approval-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--km-text);
+}
+
+.agent-approval-copy {
+  font-size: 12.5px;
+  color: var(--km-text-2);
+}
+
+.ag-agent-cmd-box {
+  margin: 0;
+  background-color: var(--km-bg-0);
+  border: 1px solid var(--km-line);
+  border-radius: 10px;
+  padding: 9px 12px;
+  font-family: var(--km-font-mono);
+  font-size: 12px;
+  color: var(--km-text);
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+
+.agent-approval-buttons,
+.ag-agent-approval-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.agent-approval-cancel,
+.ag-agent-btn-reject,
+.agent-approval-confirm,
+.ag-agent-btn-approve {
+  padding: 7px 14px;
+  border-radius: 99px;
+  font-size: 12.5px;
+  font-weight: 500;
+  font-family: var(--km-font-sans);
+  cursor: pointer;
+  border: 1px solid var(--km-line);
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.agent-approval-cancel,
+.ag-agent-btn-reject {
+  background: transparent;
+  color: var(--km-text-2);
+}
+
+.agent-approval-cancel:hover,
+.ag-agent-btn-reject:hover {
+  background: var(--km-bg-2);
+  color: var(--km-text);
+}
+
+.agent-approval-confirm,
+.ag-agent-btn-approve {
+  background: var(--km-accent);
+  border-color: transparent;
+  color: var(--km-on-accent);
+}
+
+.agent-approval-confirm:hover,
+.ag-agent-btn-approve:hover {
+  background: var(--km-accent-hover);
+}
+
+.ag-agent-approval-status {
+  font-size: 11.5px;
+  font-weight: 500;
+}
+
+.ag-agent-approval-status.approved {
+  color: var(--km-success);
+}
+
+.ag-agent-approval-status.rejected {
+  color: var(--km-danger);
+}
+
+/* Bildirim (Notice) */
+.ag-agent-notice {
+  text-align: center;
+  font-size: 12.5px;
+  padding: 7px 12px;
+  margin: 2px auto;
+  border-radius: 10px;
+  color: var(--km-text-2);
+  background-color: var(--km-bg-1);
+  border: 1px solid var(--km-line);
+}
+
+.ag-agent-notice.error {
+  color: var(--km-danger);
+  background-color: var(--km-bg-1);
+  border-color: var(--km-danger);
+}
+
+/* =========================================================
+   Diff Görünümü (DiffView)
+   ========================================================= */
+.ag-agent-diff {
+  background-color: var(--km-bg-0);
+  border: 1px solid var(--km-line);
+  border-radius: 10px;
+  overflow: hidden;
+  font-family: var(--km-font-mono);
+  font-size: 11.5px;
+}
+
+.ag-agent-diff-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  background-color: var(--km-bg-2);
+  border-bottom: 1px solid var(--km-line);
+}
+
+.ag-agent-diff-path {
+  font-weight: 500;
+  color: var(--km-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ag-agent-diff-stats {
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.ag-agent-diff-add {
+  color: var(--km-success);
+}
+
+.ag-agent-diff-del {
+  color: var(--km-danger);
+}
+
+.ag-agent-diff-too-large {
+  padding: 12px;
+  color: var(--km-text-3);
+  text-align: center;
+}
+
+.ag-agent-diff-content {
+  max-height: 280px;
+  overflow: auto;
+}
+
+.ag-agent-diff-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ag-agent-diff-row.add {
+  background-color: rgba(109, 186, 130, 0.14);
+}
+
+.ag-agent-diff-row.del {
+  background-color: rgba(239, 68, 68, 0.14);
+}
+
+.ag-agent-diff-row.same {
+  background-color: transparent;
+}
+
+.ag-agent-diff-num {
+  width: 32px;
+  min-width: 32px;
+  text-align: right;
+  padding: 1px 6px;
+  color: var(--km-text-3);
+  font-variant-numeric: tabular-nums;
+  user-select: none;
+  border-right: 1px solid var(--km-line);
+}
+
+.ag-agent-diff-text {
+  padding: 1px 8px;
+  white-space: pre;
+  color: var(--km-text-2);
+  width: 100%;
+}
+
+.ag-agent-diff-row.add .ag-agent-diff-text,
+.ag-agent-diff-row.del .ag-agent-diff-text {
+  color: var(--km-text);
+}
+
+.ag-agent-diff-sign {
+  display: inline-block;
+  width: 12px;
+  user-select: none;
+  font-weight: 600;
+}
+
+.ag-agent-diff-cell-skip,
+.ag-agent-diff-cell-more {
+  text-align: center;
+  color: var(--km-text-3);
+  padding: 4px;
+  background-color: var(--km-bg-1);
+  border-top: 1px dashed var(--km-line);
+  border-bottom: 1px dashed var(--km-line);
+}
+
+/* =========================================================
+   Yazma Kutusu (.composer — kocamind-web ChatInput.jsx eşleniği)
+   ========================================================= */
+.input-wrapper,
+.ag-agent-input-container {
+  padding: 8px 12px 12px;
+  background: var(--km-bg-0);
+  flex-shrink: 0;
+}
+
+.ag-agent-input-container.workspace-composer {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 6px 0 18px;
+}
+
+.ag-agent-panel.variant-workspace.has-items .ag-agent-input-container.workspace-composer {
+  padding: 6px 16px 18px;
+  max-width: 792px;
+}
+
+.input-container.composer,
+.ag-agent-input-box {
+  background: var(--km-bg-1);
+  border: 1px solid var(--km-line);
+  border-radius: 25px;
+  padding: 12px 14px 10px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color 0.15s ease;
+}
+
+.ag-agent-panel.variant-panel .ag-agent-input-box {
+  padding: 10px 12px 8px 14px;
+  border-radius: 22px;
+}
+
+.input-container.composer:focus-within,
+.ag-agent-input-box:focus-within {
+  border-color: var(--km-line-strong);
+}
+
+.message-input,
+.ag-agent-textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: none;
+  color: var(--km-text);
+  font-family: var(--km-font-sans);
+  font-size: 15.5px;
+  line-height: 1.5;
+  max-height: 180px;
+  min-height: 26px;
+  padding: 2px 2px;
+  overflow-y: auto;
+}
+
+.ag-agent-panel.variant-panel .ag-agent-textarea {
+  font-size: 14px;
+}
+
+.message-input:focus-visible,
+.ag-agent-textarea:focus-visible {
+  outline: none;
+}
+
+.message-input::placeholder,
+.ag-agent-textarea::placeholder {
+  color: var(--km-text-3);
+}
+
+.composer-row,
+.ag-agent-input-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+}
+
+.ag-composer-left-tools {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: nowrap;
+  flex: 1 1 0%;
+  min-width: 0;
+}
+
+.ag-agent-panel.variant-panel .ag-composer-left-tools {
+  gap: 6px;
+}
+
+.composer-right,
+.ag-composer-right-tools {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+/* Hap şekilli seçiciler (Klasör, İzin modu, ModelPicker) */
+.ag-composer-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 11px;
+  background: var(--km-bg-2);
+  border: 1px solid transparent;
+  border-radius: 99px;
+  color: var(--km-text-2);
+  font-size: 12.5px;
+  font-weight: 500;
+  font-family: var(--km-font-sans);
+  cursor: pointer;
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.ag-agent-panel.variant-panel .ag-composer-chip {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  gap: 0;
+  justify-content: center;
+  flex: 0 0 32px;
+}
+
+.ag-agent-panel.variant-panel .ag-composer-chip-label,
+.ag-agent-panel.variant-panel .ag-agent-model-btn-label,
+.ag-agent-panel.variant-panel .ag-composer-chip svg:nth-of-type(2) {
+  display: none;
+}
+
+.ag-agent-panel.variant-panel .ag-composer-chip svg {
+  width: 14px;
+  height: 14px;
+  color: var(--km-text-2);
+}
+
+.ag-agent-panel.variant-panel .ag-composer-chip:hover:not(:disabled) svg,
+.ag-agent-panel.variant-panel .ag-composer-chip.active:not(:disabled) svg {
+  color: var(--km-text);
+}
+
+.ag-composer-chip:hover:not(:disabled),
+.ag-composer-chip.active:not(:disabled) {
+  background: var(--km-bg-3);
+  color: var(--km-text);
+}
+
+.ag-composer-chip:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.ag-composer-chip:focus-visible {
+  outline: 2px solid var(--km-accent);
+  outline-offset: 2px;
+}
+
+.ag-composer-chip svg {
+  flex-shrink: 0;
+  color: var(--km-text-3);
+}
+
+.ag-composer-chip-label {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 140px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Gönder ve Durdur (40x40 yuvarlak) */
+.send-button,
+.ag-agent-btn-send,
+.stop-button,
+.ag-agent-btn-abort {
+  width: 40px;
+  height: 40px;
+  border-radius: 99px;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition:
+    background-color 0.15s ease,
+    opacity 0.15s ease,
+    transform 0.1s ease;
+}
+
+.ag-agent-panel.variant-panel .send-button,
+.ag-agent-panel.variant-panel .ag-agent-btn-send,
+.ag-agent-panel.variant-panel .stop-button,
+.ag-agent-panel.variant-panel .ag-agent-btn-abort {
+  width: 34px;
+  height: 34px;
+}
+
+.send-button,
+.ag-agent-btn-send {
+  background: var(--km-accent);
+  color: var(--km-on-accent);
+}
+
+.send-button:hover:not(:disabled),
+.ag-agent-btn-send:hover:not(:disabled) {
+  background: var(--km-accent-hover);
+}
+
+.send-button:disabled,
+.ag-agent-btn-send:disabled {
+  background: var(--km-bg-2);
+  color: var(--km-text-3);
+  cursor: default;
+  opacity: 0.55;
+}
+
+.stop-button,
+.ag-agent-btn-abort {
+  background: var(--km-text);
+  color: var(--km-bg-0);
+}
+
+.stop-button:hover,
+.ag-agent-btn-abort:hover {
+  opacity: 0.88;
+}
+
+.stop-square {
+  width: 12px;
+  height: 12px;
+  border-radius: 2.5px;
+  background: var(--km-bg-0);
+}
+
+.send-button:focus-visible,
+.stop-button:focus-visible {
+  outline: 2px solid var(--km-accent);
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   İzin Modu, Model Seçici ve Oturum Listesi Popover'ları
+   ========================================================= */
+.ag-mode-picker-wrap,
+.ag-agent-model-wrap {
+  position: relative;
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+.ag-agent-model-btn-label {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 140px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ag-mode-popover,
+.ag-agent-model-popover,
+.ag-agent-session-popover {
+  position: absolute;
+  background-color: var(--km-bg-1);
+  border: 1px solid var(--km-line-strong);
+  border-radius: 16px;
+  padding: 6px;
+  box-shadow: var(--km-shadow-pop);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ag-mode-popover {
+  bottom: calc(100% + 8px);
+  left: 0;
+  width: 260px;
+}
+
+.ag-agent-model-popover {
+  left: 0;
+  width: 260px;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.ag-agent-panel.variant-panel .ag-agent-model-popover {
+  left: 0;
+  right: auto;
+}
+
+.ag-agent-model-popover.dir-up {
+  bottom: calc(100% + 8px);
+}
+
+.ag-agent-model-popover.dir-down {
+  top: calc(100% + 6px);
+}
+
+.ag-mode-option,
+.ag-agent-model-item,
+.ag-agent-session-item {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 11px;
+  color: var(--km-text);
+  font-family: var(--km-font-sans);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.12s ease;
+}
+
+.ag-mode-option:hover,
+.ag-mode-option.active,
+.ag-agent-model-item:hover,
+.ag-agent-model-item.active,
+.ag-agent-session-item:hover,
+.ag-agent-session-item.active {
+  background-color: var(--km-bg-2);
+}
+
+.ag-mode-option-check,
+.ag-agent-model-item svg {
+  color: var(--km-accent);
+  flex-shrink: 0;
+}
+
+.ag-mode-option-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.ag-mode-option-label,
+.ag-agent-model-label,
+.ag-agent-session-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--km-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ag-mode-option-hint,
+.ag-agent-model-provider {
+  font-size: 11.5px;
+  color: var(--km-text-3);
+}
+
+.ag-agent-model-item-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  flex: 1;
+}
+
+/* Oturum Listesi Popover (Dar panel) */
+.ag-agent-session-wrap {
+  position: relative;
+}
+
+.ag-agent-session-popover {
+  top: calc(100% + 6px);
+  right: 0;
+  width: 270px;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.ag-agent-session-items {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ag-agent-session-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ag-agent-session-group-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--km-text-3);
+  padding: 4px 10px 2px;
+}
+
+.ag-agent-session-meta {
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  color: var(--km-text-3);
+  flex-shrink: 0;
+}
+
+.ag-agent-session-empty {
+  padding: 16px 10px;
+  font-size: 12.5px;
+  color: var(--km-text-3);
+  text-align: center;
+}
+
+.ag-agent-session-error-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 10px;
+}
+
+.ag-agent-session-error {
+  font-size: 12px;
+  color: var(--km-danger);
+  text-align: center;
+}
+
+.ag-session-skeleton-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 6px;
+}
+
+.ag-session-skeleton-row {
+  height: 28px;
+  border-radius: 10px;
+  background-color: var(--km-bg-2);
+  opacity: 0.7;
+}
+
+.ag-session-skeleton-row.short {
+  width: 72%;
+}
+
+/* =========================================================
+   Hesap Bileşeni (AccountButton)
+   ========================================================= */
+.ag-agent-auth {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  min-width: 0;
+}
+
+.ag-agent-auth-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+}
+
+.ag-agent-auth-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: var(--km-accent-soft);
+  color: var(--km-accent);
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ag-agent-auth-badge.muted {
+  background-color: var(--km-bg-2);
+  color: var(--km-text-3);
+}
+
+.ag-agent-auth-email {
+  font-size: 13px;
+  color: var(--km-text-2);
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ag-agent-auth-note {
+  font-size: 11.5px;
+  color: var(--km-warning);
+  line-height: 1.35;
+}
+
+.ag-agent-auth-error {
+  font-size: 11.5px;
+  color: var(--km-danger);
+}
+
+.km-spin {
+  animation: kmSpin 0.9s linear infinite;
+}
+
+/* =========================================================
+   İz Görünümü Katmanı (TraceView)
+   ========================================================= */
+.ag-trace-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 45;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--km-bg-0);
+  color: var(--km-text);
+}
+
+.ag-trace-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 18px;
+  border-bottom: 1px solid var(--km-line);
+  background-color: var(--km-bg-1);
+  flex-shrink: 0;
+}
+
+.ag-trace-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--km-text);
+}
+
+.ag-trace-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 760px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.ag-trace-empty {
+  margin: auto 0;
+  text-align: center;
+  font-size: 13.5px;
+  color: var(--km-text-3);
+}
+
+.ag-trace-turn {
+  border: 1px solid var(--km-line);
+  border-radius: 12px;
+  background-color: var(--km-bg-1);
+  overflow: hidden;
+}
+
+.ag-trace-turn-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: transparent;
+  border: none;
+  color: var(--km-text);
+  font-size: 13px;
+  font-family: var(--km-font-sans);
+  cursor: pointer;
+  text-align: left;
+  transition: background-color var(--km-dur-1) var(--km-ease-out);
+}
+
+.ag-trace-turn-header:hover {
+  background-color: var(--km-bg-2);
+}
+
+.ag-trace-turn-chevron {
+  display: inline-flex;
+  align-items: center;
+  color: var(--km-text-3);
+  flex-shrink: 0;
+  transition: transform var(--km-dur-1) var(--km-ease-out);
+}
+
+.ag-trace-turn-chevron.open {
+  transform: rotate(90deg);
+}
+
+.ag-trace-turn-user {
+  flex: 1;
+  min-width: 0;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ag-trace-badge {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: var(--km-r-pill);
+  flex-shrink: 0;
+}
+
+.ag-trace-badge.completed {
+  background-color: rgba(109, 186, 130, 0.14);
+  color: var(--km-success);
+}
+
+.ag-trace-badge.aborted {
+  background-color: rgba(226, 166, 79, 0.14);
+  color: var(--km-warning);
+}
+
+.ag-trace-badge.failed {
+  background-color: rgba(239, 68, 68, 0.14);
+  color: var(--km-danger);
+}
+
+.ag-trace-badge.running {
+  background-color: var(--km-accent-soft);
+  color: var(--km-accent);
+}
+
+.ag-trace-meta {
+  font-size: 11.5px;
+  font-variant-numeric: tabular-nums;
+  color: var(--km-text-3);
+  flex-shrink: 0;
+}
+
+.ag-trace-turn-content {
+  border-top: 1px solid var(--km-line);
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ag-trace-compact-note {
+  font-size: 11.5px;
+  color: var(--km-warning);
+  background-color: rgba(226, 166, 79, 0.1);
+  border: 1px solid rgba(226, 166, 79, 0.25);
+  border-radius: 8px;
+  padding: 5px 10px;
+}
+
+.ag-trace-step {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-left: 10px;
+  border-left: 2px solid var(--km-line-strong);
+}
+
+.ag-trace-step-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ag-trace-step-title {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--km-text-2);
+}
+
+.ag-trace-step-text {
+  font-size: 12.5px;
+  color: var(--km-text-2);
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.ag-trace-tools {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+.ag-trace-tool {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background-color: var(--km-bg-2);
+  border: 1px solid var(--km-line);
+  font-size: 11.5px;
+}
+
+.ag-trace-tool.failed {
+  border-color: var(--km-danger);
+}
+
+.ag-trace-tool-status {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--km-text-3);
+}
+
+.ag-trace-tool-status.ok {
+  color: var(--km-success);
+}
+
+.ag-trace-tool-status.failed {
+  color: var(--km-danger);
+}
+
+.ag-trace-tool-label {
+  font-weight: 500;
+  color: var(--km-text);
+  flex-shrink: 0;
+}
+
+.ag-trace-tool-summary {
+  flex: 1;
+  min-width: 0;
+  color: var(--km-text-3);
+  font-family: var(--km-font-mono);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ag-trace-approval {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 7px;
+  border-radius: var(--km-r-pill);
+  flex-shrink: 0;
+}
+
+.ag-trace-approval.approved {
+  background-color: rgba(109, 186, 130, 0.14);
+  color: var(--km-success);
+}
+
+.ag-trace-approval.rejected {
+  background-color: rgba(239, 68, 68, 0.14);
+  color: var(--km-danger);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thinking-shimmer,
+  .agent-live-dots span,
+  .agent-step-spinner,
+  .km-spin {
+    animation: none;
+  }
+
+  .ag-plan-chevron,
+  .thinking-chevron,
+  .agent-steps-chevron,
+  .ag-trace-turn-chevron {
+    transition: none;
+  }
+}

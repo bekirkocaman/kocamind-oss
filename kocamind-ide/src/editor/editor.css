@@ -1,0 +1,450 @@
+/* Editör sekmeleri, bağlam menüsü, satır içi girdi ve Hızlı Açma (kocamind-web tasarımı) */
+
+.ag-explorer-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+/* Sekme Çubuğu */
+.ag-tabs-bar {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-app-region: no-drag;
+}
+
+.ag-tabs-bar::-webkit-scrollbar {
+  height: 3px;
+}
+
+.ag-tabs-bar::-webkit-scrollbar-thumb {
+  background: var(--km-line-strong);
+  border-radius: 3px;
+}
+
+.ag-tab {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 10px 0 13px;
+  height: 100%;
+  font-size: 12.5px;
+  font-family: var(--km-font-ui);
+  color: var(--km-text-3);
+  background-color: transparent;
+  border-right: 1px solid var(--km-line);
+  border-top: 2px solid transparent;
+  cursor: pointer;
+  user-select: none;
+  flex-shrink: 0;
+  max-width: 196px;
+  transition:
+    background-color var(--km-dur-1) ease,
+    color var(--km-dur-1) ease;
+}
+
+.ag-tab:hover {
+  background-color: var(--km-bg-2);
+  color: var(--km-text-2);
+}
+
+.ag-tab.active {
+  background-color: var(--km-bg-0);
+  color: var(--km-text);
+  border-top-color: var(--km-accent);
+}
+
+.ag-tab:focus-visible {
+  outline: 2px solid var(--km-accent);
+  outline-offset: -2px;
+}
+
+.ag-tab-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ag-tab-dirty {
+  color: var(--km-accent);
+  font-size: 10px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.ag-tab-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: transparent;
+  color: var(--km-text-3);
+  border-radius: 50%;
+  cursor: pointer;
+  flex-shrink: 0;
+  padding: 0;
+  transition:
+    background-color var(--km-dur-1) ease,
+    color var(--km-dur-1) ease;
+}
+
+.ag-tab-close:hover {
+  background-color: var(--km-bg-3);
+  color: var(--km-text);
+}
+
+.ag-tab-close:focus-visible {
+  outline: 2px solid var(--km-accent);
+  outline-offset: 1px;
+}
+
+/* Gezgin Bağlam Menüsü (web .topbar-menu / .ms-panel diliyle) */
+.ag-context-menu {
+  position: fixed;
+  z-index: 10000;
+  min-width: 196px;
+  background-color: var(--km-bg-1);
+  border: 1px solid var(--km-line);
+  border-radius: var(--km-r-3);
+  padding: 6px;
+  box-shadow: var(--km-shadow-lg);
+  display: flex;
+  flex-direction: column;
+  outline: none;
+  font-family: var(--km-font-ui);
+  animation: km-menu-in 160ms var(--km-ease-out) both;
+}
+
+.ag-context-menu-item {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  color: var(--km-text);
+  font-size: 13.5px;
+  text-align: left;
+  padding: 0 12px;
+  border-radius: var(--km-r-2);
+  cursor: pointer;
+  font-family: inherit;
+  transition:
+    background-color var(--km-dur-1) ease,
+    color var(--km-dur-1) ease;
+}
+
+.ag-context-menu-item:hover {
+  background-color: var(--km-bg-2);
+  color: var(--km-text);
+}
+
+.ag-context-menu-item:focus-visible {
+  background-color: var(--km-bg-2);
+  outline: 2px solid var(--km-accent);
+  outline-offset: -2px;
+}
+
+.ag-context-menu-item.danger {
+  color: var(--km-danger);
+}
+
+.ag-context-menu-item.danger:hover,
+.ag-context-menu-item.danger:focus-visible {
+  background-color: var(--km-danger-soft);
+  color: var(--km-danger);
+}
+
+.ag-context-menu-sep {
+  height: 1px;
+  background-color: var(--km-line);
+  margin: 5px 6px;
+}
+
+/* Satır içi dosya/klasör girişi */
+.ag-tree-inline-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+}
+
+.ag-tree-inline-input {
+  flex: 1;
+  min-width: 0;
+  height: 28px;
+  background-color: var(--km-bg-0);
+  color: var(--km-text);
+  border: 1px solid var(--km-line-strong);
+  border-radius: var(--km-r-1);
+  padding: 0 8px;
+  font-size: 13px;
+  font-family: var(--km-font-ui);
+  outline: none;
+  transition: border-color var(--km-dur-1) ease;
+}
+
+.ag-tree-inline-input:focus,
+.ag-tree-inline-input:focus-visible {
+  border-color: var(--km-accent);
+  outline: none;
+}
+
+/* Hızlı Açma (Quick Open — web Dialogs.css / .km-sheet diliyle) */
+.ag-quickopen-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+  background-color: var(--km-overlay);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 72px;
+  animation: km-backdrop-in var(--km-dur-2) ease both;
+}
+
+.ag-quickopen-backdrop.closing {
+  animation: km-fade-out var(--km-dur-1) ease-out forwards;
+}
+
+.ag-quickopen-modal {
+  width: 560px;
+  max-width: calc(100vw - 32px);
+  background-color: var(--km-bg-1);
+  border: 1px solid var(--km-line);
+  border-radius: var(--km-r-4);
+  box-shadow: var(--km-shadow-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--km-font-ui);
+  animation: km-quickopen-in 160ms var(--km-ease-out) both;
+}
+
+.ag-quickopen-modal.closing {
+  animation: km-fade-out var(--km-dur-1) ease-out forwards;
+}
+
+.ag-quickopen-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--km-line);
+}
+
+.ag-quickopen-icon {
+  color: var(--km-text-3);
+  flex-shrink: 0;
+}
+
+.ag-quickopen-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--km-text);
+  font-size: 14.5px;
+  font-family: inherit;
+  outline: none;
+}
+
+.ag-quickopen-input::placeholder {
+  color: var(--km-text-3);
+}
+
+.ag-quickopen-list {
+  max-height: 340px;
+  overflow-y: auto;
+  padding: 6px;
+}
+
+.ag-quickopen-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.ag-quickopen-list::-webkit-scrollbar-thumb {
+  background: var(--km-line-strong);
+  border-radius: 4px;
+}
+
+.ag-quickopen-item {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 12px;
+  border-radius: var(--km-r-2);
+  cursor: pointer;
+  font-size: 13.5px;
+  color: var(--km-text-2);
+  transition: background-color var(--km-dur-1) ease;
+}
+
+.ag-quickopen-item:hover {
+  background-color: var(--km-bg-2);
+}
+
+.ag-quickopen-item.selected {
+  background-color: var(--km-bg-2);
+  color: var(--km-text);
+}
+
+.ag-quickopen-file-icon {
+  color: var(--km-text-3);
+  flex-shrink: 0;
+}
+
+.ag-quickopen-item.selected .ag-quickopen-file-icon {
+  color: var(--km-text-2);
+}
+
+.ag-quickopen-name {
+  color: var(--km-text);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.ag-quickopen-dir {
+  color: var(--km-text-3);
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ag-quickopen-match {
+  color: var(--km-accent);
+  font-weight: 600;
+}
+
+.ag-quickopen-skeleton-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.ag-quickopen-skeleton-row {
+  height: 34px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+}
+
+.ag-quickopen-skeleton-icon {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  background-color: var(--km-bg-2);
+  flex-shrink: 0;
+}
+
+.ag-quickopen-skeleton-bar {
+  height: 10px;
+  border-radius: 4px;
+  background-color: var(--km-bg-2);
+}
+
+.ag-quickopen-empty {
+  padding: 24px 12px;
+  text-align: center;
+  font-size: 13.5px;
+  color: var(--km-text-3);
+}
+
+.ag-quickopen-error {
+  padding: 24px 12px;
+  text-align: center;
+  font-size: 13.5px;
+  color: var(--km-danger);
+}
+
+.ag-quickopen-footer {
+  height: 34px;
+  padding: 0 14px;
+  border-top: 1px solid var(--km-line);
+  background-color: var(--km-bg-0);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 11.5px;
+  color: var(--km-text-3);
+}
+
+.ag-quickopen-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.ag-quickopen-kbd {
+  font-family: var(--km-font-mono);
+  font-size: 11px;
+  line-height: 1.2;
+  padding: 1px 6px;
+  border-radius: 5px;
+  background-color: var(--km-bg-2);
+  border: 1px solid var(--km-line);
+  color: var(--km-text-2);
+}
+
+@keyframes km-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes km-backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes km-quickopen-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes km-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ag-context-menu,
+  .ag-quickopen-backdrop,
+  .ag-quickopen-modal {
+    animation: none;
+  }
+
+  .ag-tab,
+  .ag-tab-close,
+  .ag-context-menu-item,
+  .ag-tree-inline-input,
+  .ag-quickopen-item {
+    transition: none;
+  }
+}

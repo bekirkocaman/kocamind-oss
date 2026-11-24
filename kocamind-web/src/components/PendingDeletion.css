@@ -1,0 +1,122 @@
+.pending-deletion {
+  min-height: 100dvh;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+}
+
+.pending-deletion-card {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  padding: 28px 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl, 18px);
+  box-shadow: var(--shadow-md);
+}
+
+.pending-deletion-card h1 {
+  margin: 8px 0 0;
+  font-family: var(--font-ui);
+  font-size: var(--text-xl, 22px);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.pending-deletion-card p {
+  margin: 0;
+  font-size: var(--text-base, 14px);
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.pending-deletion-card strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.pending-deletion-muted {
+  font-size: var(--text-sm, 13px);
+  color: var(--text-muted) !important;
+}
+
+.pending-deletion-error {
+  padding: 10px 12px;
+  border-radius: var(--radius-md, 10px);
+  background: var(--danger-soft);
+  color: var(--danger) !important;
+  font-size: var(--text-sm, 13px);
+  line-height: 1.5;
+}
+
+.pending-deletion-primary {
+  margin-top: 8px;
+  min-height: 46px;
+  padding: 0 16px;
+  border: none;
+  border-radius: var(--radius-md, 10px);
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  font: inherit;
+  font-size: var(--text-md, 15px);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.pending-deletion-primary:hover:not(:disabled) {
+  background: var(--btn-primary-hover);
+}
+
+.pending-deletion-link {
+  min-height: 44px;
+  padding: 8px;
+  border: none;
+  border-radius: var(--radius-md, 10px);
+  background: transparent;
+  color: var(--text-muted);
+  font: inherit;
+  font-size: var(--text-base, 14px);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.pending-deletion-link:hover:not(:disabled) {
+  color: var(--text);
+}
+
+.pending-deletion-card button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.pending-deletion-card button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .pending-deletion-card {
+    padding: 24px 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pending-deletion-primary {
+    transition: none;
+  }
+}
+
+[data-reduce-motion='true'] .pending-deletion-primary {
+  transition: none;
+}

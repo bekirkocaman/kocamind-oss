@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.KocaMind" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/windowBackground</item>
+        <item name="android:windowSplashScreenBackground">@color/windowBackground</item>
+        <item name="android:windowSplashScreenIconBackgroundColor">@color/windowBackground</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/splash_mark_animated</item>
+        <item name="android:windowSplashScreenAnimationDuration">1100</item>
+    </style>
+</resources>

@@ -1,0 +1,24 @@
+.vercel
+.env*
+!.env.example
+
+# Test çıktıları ve kişisel dosyalar
+kocamind-web/test-results/
+kocamind-web/playwright-report/
+*.jpg
+!kocamind-web/public/**/*.jpg
+node_modules/
+
+# Kotlin Android
+kocamind-android/local.properties
+kocamind-android/build/
+kocamind-android/app/build/
+kocamind-android/.gradle/
+kocamind-android/.kotlin/
+kocamind-android/app/google-services.json
+kocamind-android/app/.cxx/
+kocamind-android/keystore/release.jks
+kocamind-android/keystore.properties
+
+# Firebase emülatör kayıtları (uçtan uca testler)
+*-debug.log

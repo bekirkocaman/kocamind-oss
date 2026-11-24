@@ -1,0 +1,35 @@
+{
+  "name": "zeka-backend",
+  "version": "1.0.0",
+  "description": "Backend proxy for Zeka AI app",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node --test",
+    "billing:setup": "node scripts/setupBillingPlan.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.1",
+    "@qdrant/js-client-rest": "^1.18.0",
+    "cheerio": "^1.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^18.0.4",
+    "express": "^4.21.0",
+    "express-rate-limit": "^7.4.0",
+    "firebase-admin": "^13.10.0",
+    "form-data": "^4.0.6",
+    "helmet": "^8.3.0",
+    "multer": "^2.2.0",
+    "node-fetch": "^2.7.0",
+    "nodemailer": "^10.1.7",
+    "pdf-parse": "^1.1.1",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "supertest": "^7.3.0"
+  },
+  "overrides": {
+    "uuid": "^11.1.1"
+  }
+}

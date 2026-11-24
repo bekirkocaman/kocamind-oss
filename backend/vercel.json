@@ -1,0 +1,28 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["skills/**"]
+      }
+    }
+  ],
+  "crons": [
+    {
+      "path": "/cron/purge-deleted-accounts",
+      "schedule": "0 3 * * *"
+    },
+    {
+      "path": "/cron/self-improve",
+      "schedule": "30 3 * * *"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "server.js"
+    }
+  ]
+}

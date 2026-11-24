@@ -1,0 +1,163 @@
+.billing-contact {
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.billing-checkout-form {
+  margin-top: 14px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+.billing-form-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+  color: var(--text-secondary);
+}
+
+.billing-form-head div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.billing-form-head strong {
+  color: var(--text);
+  font-size: var(--text-base, 14px);
+  font-weight: 600;
+}
+
+.billing-form-head span {
+  color: var(--text-secondary);
+  font-size: var(--text-xs, 12px);
+}
+
+.billing-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.billing-fields label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--text-secondary);
+  font-size: var(--text-xs, 12px);
+}
+
+.billing-fields input,
+.billing-fields textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  font-size: var(--text-sm, 13px);
+  padding: 9px 11px;
+  outline: none;
+}
+
+.billing-fields input:focus,
+.billing-fields textarea:focus {
+  border-color: var(--accent);
+}
+
+.billing-fields textarea {
+  min-height: 72px;
+  resize: vertical;
+}
+
+.billing-wide {
+  grid-column: 1 / -1;
+}
+
+.billing-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin: 14px 0;
+  color: var(--text-secondary);
+  font-size: var(--text-xs, 12px);
+  line-height: 1.45;
+}
+
+.billing-consent input {
+  margin-top: 2px;
+  accent-color: var(--accent);
+}
+
+.billing-consent a {
+  color: var(--text);
+}
+
+.billing-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.billing-form-actions > button {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text);
+  padding: 8px 13px;
+  font-size: var(--text-sm, 13px);
+  cursor: pointer;
+}
+
+.billing-form-actions .plan-upgrade-btn {
+  width: auto;
+  background: var(--btn-primary-bg);
+  border-color: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.billing-spin {
+  animation: billing-spin 0.8s linear infinite;
+}
+
+@keyframes billing-spin {
+  to { transform: rotate(360deg); }
+}
+
+.billing-history-section {
+  margin-top: 6px;
+}
+
+.invoice-status {
+  font-size: var(--text-xs, 12px);
+  font-weight: 500;
+}
+
+.invoice-status.paid {
+  color: var(--success, #39a56d);
+}
+
+.invoice-status.failed {
+  color: var(--danger, #d66);
+}
+
+@media (max-width: 760px) {
+  .billing-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .billing-wide {
+    grid-column: auto;
+  }
+
+  .billing-checkout-form {
+    padding: 14px;
+  }
+}

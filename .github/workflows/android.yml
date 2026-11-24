@@ -1,0 +1,50 @@
+name: KocaMind Android
+
+on:
+  push:
+    paths:
+      - "kocamind-android/**"
+      - ".github/workflows/android.yml"
+  pull_request:
+    paths:
+      - "kocamind-android/**"
+      - ".github/workflows/android.yml"
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: kocamind-android
+    env:
+      GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: gradle/actions/setup-gradle@v4
+      # Secret yoksa dosya yazılmaz; derleme Firebase eklentisi olmadan yine geçer.
+      - name: google-services.json
+        if: env.GOOGLE_SERVICES_JSON != ''
+        run: printf '%s' "$GOOGLE_SERVICES_JSON" > app/google-services.json
+      - name: Testler ve debug APK
+        run: ./gradlew testDebugUnitTest assembleDebug --console=plain
+      # Lint hataları derlemeyi durdurur, uyarılar durdurmaz (rapor yine yüklenir).
+      - name: Android lint
+        run: ./gradlew lintDebug --console=plain
+      # Release ayarlarıyla derleme; anahtar CI'da olmadığı için APK imzasız çıkar.
+      - name: Release derlemesi
+        run: ./gradlew assembleRelease --console=plain
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lint-raporu
+          path: kocamind-android/app/build/reports/lint-results-debug.html
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: test-raporlari
+          path: kocamind-android/app/build/reports/tests/

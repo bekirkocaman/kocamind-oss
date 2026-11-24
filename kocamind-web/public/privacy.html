@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="index,follow">
+  <meta name="description" content="KocaMind gizlilik politikası, Gmail verilerinin kullanımı ve güvenlik önlemleri.">
+  <link rel="canonical" href="https://kocamind.com/privacy.html">
+  <title>Gizlilik ve KVKK — KocaMind</title>
+  <style>
+    :root{color-scheme:dark;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    *{box-sizing:border-box}body{margin:0;background:#191917;color:#f4f0e9}main{width:min(100% - 40px,780px);margin:0 auto;padding:64px 0}
+    .brand{color:#e5835f;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}h1{margin:18px 0 8px;font-family:Georgia,serif;font-size:clamp(38px,7vw,64px);font-weight:400;letter-spacing:-.04em;line-height:1.05}
+    h2{margin:40px 0 12px;font-size:21px}h3{margin:24px 0 8px;font-size:17px}p,li{color:#c8c2b9;font-size:16px;line-height:1.75}strong{color:#f4f0e9}a{color:#f0a181;text-underline-offset:3px}code{padding:2px 6px;border-radius:6px;background:#2b2a27;color:#f2c0aa}
+    .notice{margin:28px 0;padding:22px;border:1px solid #6f4636;border-radius:16px;background:#241f1b}.notice p{margin:0;color:#eee5dc}.meta{color:#918b83;font-size:14px}footer{display:flex;flex-wrap:wrap;gap:18px;margin-top:48px;padding-top:24px;border-top:1px solid #393834}
+    @media(max-width:560px){main{padding:42px 0}p,li{font-size:15px}}
+  </style>
+</head>
+<body>
+  <main>
+    <div class="brand">KocaMind</div>
+    <h1>Gizlilik ve KVKK</h1>
+    <p class="meta">Son güncelleme: 12 Ekim 2026</p>
+
+    <div class="notice">
+      <p><strong>Google Limited Use beyanı:</strong> KocaMind’in Google Workspace API’lerinden aldığı ham veya türetilmiş kullanıcı verilerini kullanması, <a href="https://developers.google.com/terms/api-services-user-data-policy" rel="noreferrer">Google API Services User Data Policy</a> kurallarına ve Limited Use şartlarına uyar.</p>
+    </div>
+
+    <h2>Veri sorumlusu ve iletişim</h2>
+    <p>KocaMind hizmeti Bekir Kocaman tarafından sunulur. Gizlilik, erişim veya silme talepleri için <a href="mailto:bekirkocaman50@gmail.com">bekirkocaman50@gmail.com</a> adresine ulaşabilirsiniz.</p>
+
+    <h2>İşlenen genel veriler</h2>
+    <p>Hesap bilgileri, sohbet içerikleri, yüklediğiniz dosyalar, tercihler ve hizmet güvenliği için gerekli sınırlı teknik kayıtlar işlenebilir. Sohbetler cihazınızda; giriş yaptığınızda ise Firebase altyapısında hesabınıza bağlı olarak saklanabilir. Bu genel sohbet verileri, seçtiğiniz özelliğin çalışması için etkin yapay zekâ sağlayıcısına gönderilebilir.</p>
+
+    <h2>Ziyaret istatistikleri</h2>
+    <p>Sitenin kaç kez ziyaret edildiğini ve hangi sayfaların kullanıldığını anlamak için Vercel Web Analytics kullanılır. Bu ölçüm çerez kullanmaz, sizi siteler arasında takip etmez ve sohbet içeriklerinize erişmez; yalnızca sayfa adresi, yönlendiren site, ülke, cihaz ve tarayıcı türü gibi toplu ve anonim bilgiler işlenir.</p>
+
+    <h2>Google ve Gmail verileri</h2>
+    <h3>İstenen izin ve neden gerekli olduğu</h3>
+    <p>Gmail bağlantısı tamamen isteğe bağlıdır. KocaMind yalnızca <code>https://www.googleapis.com/auth/gmail.readonly</code> iznini ister. Bu izin, kullanıcı “maillerime bak”, “son iletileri göster” veya benzeri açık bir komut verdiğinde gelen kutusundaki en son iletilerin <strong>gönderen, konu, tarih ve kısa önizleme</strong> bilgilerini göstermek için gereklidir.</p>
+    <p>Daha dar Gmail izinleri bu özelliği sağlayamaz: <code>gmail.metadata</code> ileti gövdesinden üretilen kısa önizlemeyi vermez; <code>gmail.labels</code> veya <code>gmail.send</code> ise ileti listesini okuyamaz. KocaMind e-posta göndermez, silmez, arşivlemez, etiketlemez ve Gmail ayarlarını değiştirmez.</p>
+
+    <h3>Ne zaman ve nasıl kullanılır?</h3>
+    <p>Gmail verileri yalnızca kullanıcının görünür Gmail özelliğini açıkça çalıştırdığı anda alınır. Arka planda tarama yapılmaz. KocaMind en fazla son 15 gelen kutusu kaydını ister; varsayılan işlem son 5 kaydı gösterir.</p>
+    <p><strong>Gmail’den alınan ham veya türetilmiş veriler hiçbir üçüncü taraf yapay zekâ/ML sağlayıcısına gönderilmez ve hiçbir yapay zekâ modelini oluşturmak, eğitmek veya iyileştirmek için kullanılmaz.</strong> Gmail sonuçları kurallı biçimlendirme ile doğrudan kullanıcıya gösterilir.</p>
+
+    <h3>Saklama, silme ve erişimi kaldırma</h3>
+    <p>Google erişim belirteci yalnızca tarayıcının geçici oturum belleğinde (<code>sessionStorage</code>) tutulur, kalıcı veritabanımıza yazılmaz ve kısa süre içinde sona erer. Gmail’den alınan ileti başlıkları, önizlemeler ve Gmail görev sonuçları KocaMind sohbet geçmişine veya sunucu kayıtlarına kalıcı olarak kaydedilmez.</p>
+    <p>Ayarlar → Bağlantılar → Gmail bölümündeki “Bağlantıyı Kes” işlemi geçici belirteci cihazdan kaldırır. Kullanıcı ayrıca <a href="https://myaccount.google.com/connections" rel="noreferrer">Google Hesabı bağlantıları</a> sayfasından KocaMind erişimini tamamen geri alabilir. Ayrıntılı adımlar için <a href="/gmail-help.html">Gmail bağlantısı yardım sayfasına</a> bakabilirsiniz.</p>
+
+    <h2>Güvenlik önlemleri</h2>
+    <ul>
+      <li>Google ve Gmail verileri dış ağlarda HTTPS/TLS ile şifreli olarak aktarılır.</li>
+      <li>OAuth erişim belirteci veritabanına, uygulama günlüklerine veya analiz olaylarına yazılmaz.</li>
+      <li>Gmail yanıtlarında <code>Cache-Control: no-store</code> kullanılır; sonuçlar sunucu önbelleğine alınmaz.</li>
+      <li>Gmail isteği yalnızca oturum açmış KocaMind kullanıcısından gelen doğrulanmış isteklerde çalışır.</li>
+      <li>Uygulama erişim kontrolü, istek sınırlandırma, güvenlik başlıkları ve en az yetki ilkesi uygular.</li>
+      <li>Yetkisiz erişim şüphesinde erişim durdurulur, gerekli inceleme yapılır ve mevzuatın gerektirdiği bildirimler gerçekleştirilir.</li>
+    </ul>
+
+    <h2>Yapay zekâ sağlayıcıları</h2>
+    <p>Genel sohbet ve araştırma özellikleri, kullanıcı tarafından seçilen modele göre OpenAI API veya DeepSeek API gibi üçüncü taraf yapay zekâ hizmetlerini kullanabilir. Web araması ve görsel gibi ayrı özelliklerde Google Gemini API kullanılabilir. Bu sağlayıcılara yalnızca ilgili genel özelliğin çalışması için gereken içerik gönderilir. <strong>Bu bölümdeki sağlayıcıların hiçbirine Gmail API verisi gönderilmez.</strong></p>
+
+    <h2>Otomatik hafıza ve sohbet özetleri</h2>
+    <p>Ayarlar → Gizlilik bölümünde “Otomatik Hafıza Oluşturma” açıkken, yazdığınız mesajlar kalıcı kişisel bilgi (ör. isim, şehir, tercihler) içerip içermediğini anlamak için DeepSeek API’ye gönderilir; bulunan bilgiler hesabınıza bağlı hafızaya kaydedilir ve Ayarlar → Hafıza bölümünden görülüp silinebilir. Parola, kart numarası ve T.C. kimlik numarası gibi hassas veriler hafızaya kaydedilmez. Çok uzun sohbetlerde eski mesajlar, asistanın bağlamı kaybetmemesi için yine DeepSeek API ile özetlenir ve özet sohbetle birlikte saklanır. <strong>Gmail verileri bu işlemlere hiçbir zaman dahil edilmez.</strong></p>
+
+    <h2>Ödeme ve faturalama verileri</h2>
+    <p>Ücretli plana geçtiğinizde aboneliğin kurulması ve yasal fatura yükümlülükleri için şu bilgiler istenir: ad, soyad, T.C. kimlik numarası, e-posta, cep telefonu ve fatura adresi (il, ilçe, açık adres, posta kodu). Bu bilgiler yalnızca ödeme kuruluşu iyzico’ya iletilir; işleme dayanağı sözleşmenin kurulması ve ifası ile hukuki yükümlülüklerdir (KVKK md. 5/2-c ve 5/2-ç).</p>
+    <p>Ödeme formu açık kaldığı süre (en fazla 30 dakika) boyunca bu bilgiler iyzico’nun oluşturduğu ödeme oturumunda geçici olarak tutulur; ödeme tamamlanınca veya süre dolunca KocaMind sunucularından silinir. Kart bilgileri doğrudan iyzico’nun ödeme sayfasında işlenir; KocaMind sunucularına gelmez ve tarafımızca saklanmaz. iyzico ödeme sayfasında kartınızı kaydetmeyi seçerseniz kart bilgisi iyzico tarafından, iyzico’nun kendi koşullarına göre saklanır. Abonelik kayıtları ve faturalar vergi mevzuatının öngördüğü süre boyunca saklanır.</p>
+
+    <h2>Saklama, dışa aktarma ve hesap silme</h2>
+    <p>Ayarlar bölümünden KocaMind hesap verilerinizi dışa aktarabilir, sohbet ve hafıza verilerinizi silebilir veya hesabınızı silebilirsiniz. Hesap silme talebinden sonra hesabınız hemen kilitlenir ve verileriniz 60 gün boyunca saklanır; bu süre içinde giriş yaparak hesabınızı geri alabilir veya beklemeden kalıcı silmeyi seçebilirsiniz. 60 günün sonunda sohbetleriniz, hafızanız, yüklediğiniz belgeler ve oluşturduğunuz görsel/video dosyaları dahil hesap verileriniz kalıcı olarak silinir. Yasal saklama yükümlülüğü olan ödeme kayıtları ilgili süre boyunca saklanır. Gmail sonuçları kalıcı olarak saklanmadığından ayrıca silinecek bir Gmail veri arşivi oluşmaz.</p>
+
+    <h2>Haklarınız</h2>
+    <p>KVKK’nın 11. maddesi kapsamında verilerinize erişme, düzeltme, silme, işlemeye itiraz etme ve bilgi talep etme haklarına sahipsiniz. Taleplerinizi yukarıdaki iletişim adresine gönderebilirsiniz.</p>
+
+    <footer>
+      <a href="/">KocaMind’i aç</a>
+      <a href="/about.html">Hakkında</a>
+      <a href="/gmail-help.html">Gmail yardımı</a>
+      <a href="/terms.html">Kullanım Koşulları</a>
+    </footer>
+  </main>
+</body>
+</html>

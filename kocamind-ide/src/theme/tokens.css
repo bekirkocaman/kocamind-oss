@@ -1,0 +1,106 @@
+/* KocaMind IDE — Tasarım Tokenları (v2: kocamind-web ile birebir) */
+:root,
+[data-theme='dark'] {
+  /* Yüzeyler (sıcak koyu tonlar — saf siyah yok) */
+  --km-bg-0: #151515;
+  --km-bg-sidebar: #111111;
+  --km-bg-1: #20201f;
+  --km-bg-2: #2c2c2a;
+  --km-bg-3: #353533;
+
+  /* Çizgi ve ayırıcılar */
+  --km-line: #2a2a29;
+  --km-line-strong: #353533;
+
+  /* Yazı hiyerarşisi */
+  --km-text: #f9f9f7;
+  --km-text-2: #a6a5a0;
+  --km-text-3: #95948f;
+
+  /* Marka vurgusu (sıcak kiremit) */
+  --km-accent: #d97757;
+  --km-accent-hover: #e08e72;
+  --km-accent-soft: rgba(217, 119, 87, 0.13);
+  --km-accent-muted: #3a2620;
+  --km-on-accent: #1a1a19;
+
+  /* Birincil düğme (kırık beyaz zemin, koyu yazı) */
+  --km-btn-primary-bg: #f9f9f7;
+  --km-btn-primary-text: #151515;
+  --km-btn-primary-hover: #ffffff;
+
+  /* Durum renkleri */
+  --km-danger: #e5675a;
+  --km-danger-soft: #34201d;
+  --km-success: #6dba82;
+  --km-warning: #e2a64f;
+  --km-info: #6fa8f5;
+
+  /* Örtü ve gölgeler */
+  --km-overlay: rgba(0, 0, 0, 0.55);
+  --km-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.16);
+  --km-shadow-md: 0 9px 28px rgba(0, 0, 0, 0.18);
+  --km-shadow-lg: 0 20px 58px rgba(0, 0, 0, 0.34);
+
+  /* Köşe yarıçapları (web: 7 / 10 / 14 / 18 ve hap 99px) */
+  --km-r-1: 7px;
+  --km-r-2: 10px;
+  --km-r-3: 14px;
+  --km-r-4: 18px;
+  --km-r-pill: 99px;
+
+  /* Yazı tipleri (yerel @fontsource-variable paketleri) */
+  --km-font-ui: 'Inter Variable', Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --km-font-display: 'Newsreader Variable', Newsreader, Georgia, 'Times New Roman', serif;
+  --km-font-reply: var(--km-font-display);
+  --km-font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', 'Cascadia Code', Consolas, monospace;
+
+  /* Hareket süreleri ve eğrileri (web ile uyumlu) */
+  --km-dur-1: 120ms;
+  --km-dur-2: 200ms;
+  --km-dur-3: 250ms;
+  --km-ease-out: cubic-bezier(0.2, 0, 0, 1);
+  --km-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Odak halkası */
+  --km-focus-ring: 0 0 0 2px var(--km-bg-0), 0 0 0 4px var(--km-accent);
+
+  /* Üst çubuk yüksekliği */
+  --km-titlebar-h: 40px;
+}
+
+[data-theme='light'] {
+  --km-bg-0: #f9f9f7;
+  --km-bg-sidebar: #f0efec;
+  --km-bg-1: #ffffff;
+  --km-bg-2: #e7e6e1;
+  --km-bg-3: #dcdbd5;
+
+  --km-line: #e2e1dc;
+  --km-line-strong: #cfcec8;
+
+  --km-text: #131313;
+  --km-text-2: #5e5d59;
+  --km-text-3: #666561;
+
+  --km-accent: #b5532f;
+  --km-accent-hover: #a0482a;
+  --km-accent-soft: rgba(181, 83, 47, 0.11);
+  --km-accent-muted: #f5e6df;
+  --km-on-accent: #ffffff;
+
+  --km-btn-primary-bg: #131313;
+  --km-btn-primary-text: #f9f9f7;
+  --km-btn-primary-hover: #2c2c2a;
+
+  --km-danger: #c2412d;
+  --km-danger-soft: #f8e4df;
+  --km-success: #3b7d4f;
+  --km-warning: #a8670f;
+  --km-info: #2c6bd1;
+
+  --km-overlay: rgba(0, 0, 0, 0.55);
+  --km-shadow-sm: 0 1px 2px rgba(19, 19, 19, 0.04);
+  --km-shadow-md: 0 8px 26px rgba(19, 19, 19, 0.07);
+  --km-shadow-lg: 0 18px 54px rgba(19, 19, 19, 0.14);
+}
